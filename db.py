@@ -1,19 +1,12 @@
-import mysql.connector
+import psycopg2
 import os
+from dotenv import load_dotenv
 
-db_host = os.environ.get('db_host')
-db_user = os.environ.get('db_user')
-db_password = os.environ.get('db_password')
-db_db = os.environ.get('db_db')
+load_dotenv()
+db_url = os.getenv("db_url")
 
-database = mysql.connector.connect(
-    host=db_host,
-    user=db_user,
-    password=db_password,
-    database=db_db
-)
-
-db = database.cursor()
+conn = psycopg2.connect(db_url)
+print("Opened database successfully")
 
 
 async def get_data(db):
@@ -22,3 +15,6 @@ async def get_data(db):
     """
     for row in db:
         return row[0]
+
+
+db = conn.cursor()
