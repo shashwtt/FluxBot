@@ -1,7 +1,28 @@
+import json
 import discord
-
+from db import *
 import hex_colors
 from discord.ext import commands
+
+
+def get_prefix(guild):
+    with open('prefix.json', 'r') as f:
+        cache = json.load(f)
+
+    guild = str(guild)
+
+    if guild in cache:
+        prefix = cache[guild]
+    else:
+        db.execute(f"SELECT prefix FROM Prefix WHERE guild = '{guild}'")
+        prefix = db.fetchone()
+        prefix = prefix[0]
+        cache[str(guild)] = prefix
+
+        with open('prefix.json', 'w') as g:
+            json.dump(cache, g)
+
+    return prefix
 
 
 class ErrorHandling(commands.Cog):
@@ -77,8 +98,7 @@ class ErrorHandling(commands.Cog):
         elif isinstance(error, commands.BadArgument):
             em = discord.Embed(title="Error", color=hex_colors.red)
             em.add_field(name="Invalid arguments",
-                         value=":x: I think you used the command wrong. For more info, try running: ```-help {}```".format(
-                             ctx.command))
+                         value=f":x: I think you used the command wrong. For more info, try running: ```{get_prefix(ctx.guild.id)}help {ctx.command}```")
             await ctx.send(embed=em)
             ctx.command.reset_cooldown(ctx)
             return
