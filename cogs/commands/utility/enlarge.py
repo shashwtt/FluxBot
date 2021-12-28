@@ -42,7 +42,7 @@ class EnlargeEmoji(commands.Cog):
         except Exception:
             await ctx.send(embed=discord.Embed(
                 title="No dumb!",
-                description="Give me Custom emmojis not the default ones.."
+                description="Give me Custom emojis not the default ones.."
             ))
 
     async def install_emoji(self, ctx, emoji_json):
