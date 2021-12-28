@@ -72,6 +72,7 @@ class Help(Cog):
 			for i in command.aliases:
 				self.aliases[f'{i}'] = str(command)
 
+
 	async def cmd_help(self, ctx, command):  # Makes the embed
 		_aliases = ', '.join([*command.aliases])
 		if _aliases == '':
@@ -119,7 +120,7 @@ class Help(Cog):
 						inline=False
 					)
 
-			await ctx.send(command_name, embed=embed)
+			await ctx.send(f":tick: {command_name}", embed=embed)
 		# elif command_name in get_working_cogs():
 		else:
 
