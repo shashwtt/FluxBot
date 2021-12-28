@@ -23,20 +23,27 @@ class EnlargeEmoji(commands.Cog):
         await self.emoji_from_url(ctx, emoji)
 
     async def emoji_from_url(self, ctx, emoji, image=None):
-        if image is None:
-            image = emoji
-            emoji = None
+        try:
+            if image is None:
+                image = emoji
+                emoji = None
 
-        image_url = None
-        if image:
-            try:
-                image = await discord.ext.commands.PartialEmojiConverter.convert(self, ctx=ctx, argument=image)
-                image_url = image.url
+            image_url = None
+            if image:
+                try:
+                    image = await discord.ext.commands.PartialEmojiConverter.convert(self, ctx=ctx, argument=image)
+                    image_url = image.url
 
-            except commands.BadArgument:
-                image_url = image
+                except commands.BadArgument:
+                    image_url = image
 
-        await self.install_emoji(ctx, {"title": emoji, "image": image_url})
+
+            await self.install_emoji(ctx, {"title": emoji, "image": image_url})
+        except Exception:
+            await ctx.send(embed=discord.Embed(
+                title="No dumb!",
+                description="Use custom emojis"
+            ))
 
     async def install_emoji(self, ctx, emoji_json):
         response = requests.get(emoji_json["image"], stream=True)

@@ -11,8 +11,8 @@ class StealEmoji(commands.Cog):
         self.client = client
 
     @commands.command(
-        name="stealemoji",
-        aliases=["steal-emoji", "emojiadd", "se"],
+        name="steal",
+        aliases=["stealemoji", "emojiadd", "se"],
         description="Download emojis that you have access to and upload them to your own server."
     )
     @commands.has_permissions(manage_emojis=True)
