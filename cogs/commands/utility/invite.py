@@ -15,7 +15,7 @@ class Invite(commands.Cog):
 	async def invite(self, ctx):
 		em = discord.Embed(
 			title="Thank you for inviting me",
-			description=f"Click [here](https://discord.com/api/oauth2/authorize?client_id={self.client.user.id}&permissions={self.perms}&scope=bot) to add me to your server\nClick [here](https://discord.gg/TqSyUBhFFC) to join the support server."
+			description=f"Click [here](https://discord.com/api/oauth2/authorize?client_id={self.client.user.id}&permissions={self.perms}&scope=bot) to add me to your server\nClick [here](https://discord.gg/BgmX5V8tQW) to join the support server."
 		)
 		em.set_thumbnail(url=self.client.user.avatar_url)
 		em.set_footer(text='Bot created by <@663675391592103936>')
