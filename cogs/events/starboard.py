@@ -109,7 +109,8 @@ class StarboardEvent(commands.Cog):
 					starcount[str(payload.message_id)] = 1
 
 				if starcount[str(payload.message_id)] <= 1:
-					await channel.send(embed=em)
+					starred = await channel.send(embed=em)
+					starred.add_reaction("⭐")
 
 				if starcount[str(payload.message_id)] > 1:
 					return
