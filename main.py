@@ -80,7 +80,8 @@ def load_events():
     for file in os.listdir("cogs/events/"):
         if file.endswith(".py"):
             extension = file[:-3]
-            blacklisted_ext = ["on_command_error"]
+            blacklisted_ext = []
+            # blacklisted_ext = ["on_command_error"]
             if extension in blacklisted_ext:
                 print(f"Skipped event : {extension}")
             else:
