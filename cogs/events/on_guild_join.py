@@ -34,6 +34,7 @@ class OnGuildJoin(commands.Cog):
                 break
         db.execute(f"INSERT INTO Prefix(guild, prefix) VALUES ('{guild.id}','{self.prefix}')")
         db.execute(f"INSERT INTO AutoMod(guild, _status) VALUES ('{guild.id}','enabled')")
+        print(f"Created config for new server -> {str(guild)}, ID -> {guild.id}")
         conn.commit()
 
 

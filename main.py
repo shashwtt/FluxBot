@@ -1,4 +1,6 @@
 import json
+import sys
+
 from db import *
 import os
 import discord
@@ -12,28 +14,52 @@ from dotenv import load_dotenv
 """
 
 
+async def create_prefix(guild):
+    for channel in guild.text_channels:
+        if guild.me.guild_permissions.send_messages and guild.me.guild_permissions.embed_links:
+            em = discord.Embed(
+                title='Hey there!',
+                description=f'Thanks for inviting me to your server.\nMy prefix is \'`{prefix}`\' If you '
+                            f'wish to change it, use the prefix command.',
+                color=0x60FF60
+            )
+            em.add_field(
+                name='Example usage:',
+                value=f'<@899263193568936028>` prefix <new-prefix>`\nor\n`{prefix}prefix <new-prefix>`'
+            )
+            await channel.send(embed=em)
+            break
+    db.execute(f"INSERT INTO Prefix(guild, prefix) VALUES ('{guild.id}','{prefix}')")
+    db.execute(f"INSERT INTO AutoMod(guild, _status) VALUES ('{guild.id}','enabled')")
+    print(f"Created config for new server -> {str(guild)}, ID -> {guild.id}")
+    conn.commit()
+
+
 def get_prefix(_client, message):
     """
     Function to get prefix for a guild
     """
-    fe = open('prefix.json', 'r')
-    cache = json.load(fe)
+    try:
+        fe = open('prefix.json', 'r')
+        cache = json.load(fe)
 
-    guild = str(message.guild.id)
-    if guild in cache:
-        # We don't want to call the database every single time
-        prefix = commands.when_mentioned_or(cache[guild])(_client, message)
-        return prefix
+        guild = str(message.guild.id)
+        if guild in cache:
+            # We don't want to call the database every single time
+            prefix = commands.when_mentioned_or(cache[guild])(_client, message)
+            return prefix
 
-    else:
-        db.execute(f"SELECT prefix FROM Prefix WHERE guild = '{str(message.guild.id)}'")
-        prefix = db.fetchone()
-        cache[str(guild)] = prefix[0]
-        # So that it gets stored in the cache
-        with open('prefix.json', 'w') as f:
-            json.dump(cache, f, indent=4)
+        else:
+            db.execute(f"SELECT prefix FROM Prefix WHERE guild = '{str(message.guild.id)}'")
+            prefix = db.fetchone()
+            cache[str(guild)] = prefix[0]
+            # So that it gets stored in the cache
+            with open('prefix.json', 'w') as f:
+                json.dump(cache, f, indent=4)
 
-        return commands.when_mentioned_or(prefix[0])(_client, message)
+            return commands.when_mentioned_or(prefix[0])(_client, message)
+    except TypeError:
+        create_prefix(message.guild)
 
 
 def get_config():
@@ -120,6 +146,12 @@ bot.remove_command("help")
 if __name__ == '__main__':
     load_events()
     load_commands()
+    if not os.path.isfile("config.json"):
+        sys.exit("'config.json' not found! Please add it and try again.")
+    else:
+        with open("config.json") as file:
+            config = json.load(file)
+    prefix = config["bot_prefix"]
 
 
 # The code in this event is executed every time a command has been *successfully* executed
