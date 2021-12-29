@@ -24,6 +24,7 @@ class StarboardCommands(commands.Cog):
 `disable` - Disable starboard for the server
             """,
             color=hex_colors.l_yellow)
+        channel = None
         if guild not in cache:
             db.execute(f"SELECT _status FROM Starboard WHERE guild = '{ctx.guild.id}'")
             status = await get_data(db=db)
