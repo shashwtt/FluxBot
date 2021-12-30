@@ -10,7 +10,7 @@ class Invite(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 
-	@commands.command(name='invite', aliases=['addbot'], help="Invite the bot to your server")
+	@commands.command(name='invite', aliases=[".inv", '.support'], help="Invite the bot to your server")
 	async def invite(self, ctx):
 		owner = await self.client.fetch_user(int(self.client.owner_ids[0]))
 		em = discord.Embed(
