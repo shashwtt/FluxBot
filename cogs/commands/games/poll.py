@@ -27,9 +27,8 @@ class Poll(Cog):
             text=f"Poll created by: {context.message.author} • React to vote!"
         )
         embed_message = await context.send(embed=embed)
-        await embed_message.add_reaction("👍")
-        await embed_message.add_reaction("👎")
-        await embed_message.add_reaction("🤷")
+        await embed_message.add_reaction("⬆")
+        await embed_message.add_reaction("⬇")
 
 
 def setup(client):
