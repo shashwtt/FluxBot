@@ -120,7 +120,7 @@ class Help(Cog):
 						inline=False
 					)
 
-			await ctx.send(f":tick: {command_name}", embed=embed)
+			await ctx.send(f"{command_name}", embed=embed)
 		# elif command_name in get_working_cogs():
 		else:
 
