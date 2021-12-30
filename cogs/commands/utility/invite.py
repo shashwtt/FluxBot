@@ -1,6 +1,6 @@
 import discord
-import os
 from dotenv import load_dotenv
+from discord.ui import Button, View
 from discord.ext import commands
 
 load_dotenv()
@@ -12,18 +12,21 @@ class Invite(commands.Cog):
 
 	@commands.command(name='invite', aliases=['addbot'], help="Invite the bot to your server")
 	async def invite(self, ctx):
+		owner = await self.client.fetch_user(int(self.client.owner_ids[0]))
 		em = discord.Embed(
 			title="I'm glad you asked ```:D```",
 			description=f"\nClick [here](https://top.gg/bot/899263193568936028) to add me to your server\nClick ["
-			            f"here](https://discord.gg/BgmX5V8tQW) to join the support server. "
+			f"here](https://discord.gg/BgmX5V8tQW) to join the support server. \n\n Bot created by - <@{owner.id}>"
 		)
 		em.set_thumbnail(url=self.client.user.avatar_url)
-		em.set_footer(
-			text='Bot created by <@663675391592103936>',
-			icon_url=self.client.get_user(self.client.owner_ids[0]).avatar_url
-		)
+		add_bot_button = Button(label="Invite Bot", url="https://discord.com/api/oauth2/authorize?client_id=899263193568936028&permissions=0&scope=bot")
+		joinserver_button = Button(label="Invite Bot", url="https://discord.gg/BgmX5V8tQW")
 
-		await ctx.send(embed=em)
+
+		view = View()
+		view.add_item(add_bot_button)
+		view.add_item(joinserver_button)
+		await ctx.send(embed=em, view=view)
 
 
 def setup(client):
