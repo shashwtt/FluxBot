@@ -106,7 +106,7 @@ class ErrorHandling(commands.Cog):
         elif isinstance(error, commands.CommandNotFound):
             return
 
-        elif isinstance(error, discord.errors.Forbidden) or isinstance(error, discord.Forbidden):
+        elif isinstance(error, discord.Forbidden):
             try:
                 em = discord.Embed(title='Error', color=hex_colors.red)
                 em.add_field(name='Missing Permissions',
