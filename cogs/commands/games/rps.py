@@ -27,7 +27,7 @@ class RPS(Cog):
             "✂": 2
         }
         embed = discord.Embed(title="Please choose", color=0xF59E42)
-        embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+        embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar.url)
         choose_message = await ctx.send(embed=embed)
         for emoji in reactions:
             await choose_message.add_reaction(emoji)
@@ -45,7 +45,7 @@ class RPS(Cog):
             bot_choice_index = reactions[bot_choice_emote]
 
             result_embed = discord.Embed(color=0x42F56C)
-            result_embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+            result_embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar.url)
             await choose_message.clear_reactions()
 
             if user_choice_index == bot_choice_index:
@@ -68,7 +68,7 @@ class RPS(Cog):
         except asyncio.exceptions.TimeoutError:
             await choose_message.clear_reactions()
             timeout_embed = discord.Embed(title="Too late", color=0xE02B2B)
-            timeout_embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+            timeout_embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar.url)
             await choose_message.edit(embed=timeout_embed)
 
 

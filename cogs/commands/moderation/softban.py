@@ -47,14 +47,14 @@ class SoftBan(commands.Cog):
 
         # Embed to be sent to the member
         m_em = discord.Embed(color=hex_colors.m_red)
-        m_em.set_author(name=f"{ctx.author} kicked you from {ctx.guild.name}", icon_url=ctx.author.avatar_url)
+        m_em.set_author(name=f"{ctx.author} kicked you from {ctx.guild.name}", icon_url=ctx.author.avatar.url)
         m_em.set_thumbnail(url=ctx.guild.icon_url)
         m_em.add_field(name="Reason", value=reason)
 
         # Embed to be sent in the channel
         em = discord.Embed(color=hex_colors.m_red)
-        em.set_author(name=f"{ctx.author} kicked {member}", icon_url=ctx.author.avatar_url)
-        em.set_thumbnail(url=member.avatar_url)
+        em.set_author(name=f"{ctx.author} kicked {member}", icon_url=ctx.author.avatar.url)
+        em.set_thumbnail(url=member.avatar.url)
         em.add_field(name='Reason:', value=reason)
 
         try:

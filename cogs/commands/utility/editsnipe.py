@@ -27,7 +27,7 @@ class editSnipe(commands.Cog):
         try:
             em = discord.Embed(color=random.choice(hex_colors.colors), timestamp=edit_msg[str(ctx.channel.id)]['time'])
             em.set_author(name=f"{edit_msg[str(ctx.channel.id)]['author']} said:",
-                          icon_url=edit_msg[str(ctx.channel.id)]['author'].avatar_url)
+                          icon_url=edit_msg[str(ctx.channel.id)]['author'].avatar.url)
             em.add_field(name='Before', value=edit_msg[str(ctx.channel.id)]['before'],
                          inline=False)  # If the embed has 2 fields, using inline=False only once is enough)
             em.add_field(name='After', value=edit_msg[str(ctx.channel.id)]['after'])

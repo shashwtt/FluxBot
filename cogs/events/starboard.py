@@ -88,9 +88,9 @@ class StarboardEvent(commands.Cog):
 				)
 				em.set_author(
 					name=msg.author,
-					icon_url=msg.author.avatar_url)
+					icon_url=msg.author.avatar.url)
 
-				em.set_footer(text=f"Starred by {user}", icon_url=user.avatar_url)
+				em.set_footer(text=f"Starred by {user}", icon_url=user.avatar.url)
 
 				if len(msg.attachments) > 0:
 					em.set_image(url=msg.attachments[0].url)

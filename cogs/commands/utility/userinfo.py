@@ -38,7 +38,7 @@ class UserInfo(Cog):
             roles = "User has no roles in this server."
 
         em = discord.Embed(title=f"Found information for {member}", color=random.choice(hex_colors.colors))
-        em.set_thumbnail(url=member.avatar_url)
+        em.set_thumbnail(url=member.avatar.url)
         em.add_field(
             name="ID",
             value=id,
@@ -57,7 +57,7 @@ class UserInfo(Cog):
             inline=False)
         em.set_footer(
             text=f"Requested by {ctx.author.nick}",
-            icon_url=ctx.author.avatar_url)
+            icon_url=ctx.author.avatar.url)
 
         await ctx.send(embed=em)
 

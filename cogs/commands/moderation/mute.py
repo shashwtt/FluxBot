@@ -46,7 +46,7 @@ class MuteUnmute(commands.Cog):
             description=f"Reason:\n{reason}",
             color=hex_colors.m_red
         )
-        em.set_thumbnail(url=member.avatar_url)
+        em.set_thumbnail(url=member.avatar.url)
 
         await ctx.send(embed=em)
 
@@ -109,7 +109,7 @@ class MuteUnmute(commands.Cog):
                 description=f"Reason:\n{reason}",
                 color=hex_colors.l_green
             )
-            em.set_thumbnail(url=member.avatar_url)
+            em.set_thumbnail(url=member.avatar.url)
 
             await ctx.message.delete()
             await ctx.send(embed=em)

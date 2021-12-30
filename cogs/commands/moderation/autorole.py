@@ -49,7 +49,7 @@ class AutoRole(commands.Cog):
             title='Set auto-role',
             description=role.mention,
             color=hex_colors.m_red)
-        em.set_footer(text=f"Action taken by {ctx.author}", icon_url=ctx.author.avatar_url)
+        em.set_footer(text=f"Action taken by {ctx.author}", icon_url=ctx.author.avatar.url)
         await ctx.send(embed=em)
 
     @auto_role.command(name='disable', help='Disable auto-role in your server')

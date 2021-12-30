@@ -47,7 +47,7 @@ class ServerInfo(Cog):
         em.add_field(name='Security Level', value=str(level).capitalize(), inline=False)
         em.add_field(name='Server Boosters', value=len(subs), inline=False)
         em.add_field(name='Server level', value=boost_level, inline=False)
-        em.set_footer(text=f'Requested by {ctx.author.display_name}', icon_url=ctx.author.avatar_url)
+        em.set_footer(text=f'Requested by {ctx.author.display_name}', icon_url=ctx.author.avatar.url)
 
         await ctx.send(embed=em)
 

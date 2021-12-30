@@ -44,7 +44,7 @@ class Snipe(commands.Cog):
             em = discord.Embed(description=msg_content, color=random.choice(hex_colors.colors),
                                timestamp=del_msg[str(ctx.channel.id)]['time'])
             em.set_author(name=f"{del_msg[str(ctx.channel.id)]['author']} said:",
-                          icon_url=del_msg[str(ctx.channel.id)]['author'].avatar_url)
+                          icon_url=del_msg[str(ctx.channel.id)]['author'].avatar.url)
 
             if del_msg[str(ctx.channel.id)]['attachment'] is not None:
                 em.description = f"{msg_content} \n\n [**Attachment**]({del_msg[str(ctx.channel.id)]['attachment']})"

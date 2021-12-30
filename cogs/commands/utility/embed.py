@@ -105,7 +105,7 @@ class Embed(commands.Cog):
         if webhook is None:
             webhook = await channel.create_webhook(name='roastinator')
 
-        await webhook.send(embed=em, username=ctx.author.display_name, avatar_url=ctx.author.avatar_url)
+        await webhook.send(embed=em, username=ctx.author.display_name, avatar.url=ctx.author.avatar.url)
 
 
 def setup(client):
