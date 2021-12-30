@@ -20,7 +20,7 @@ class Invite(commands.Cog):
 		)
 		em.set_thumbnail(url=self.client.user.avatar.url)
 		add_bot_button = Button(label="Invite Bot", url="https://discord.com/api/oauth2/authorize?client_id=899263193568936028&permissions=0&scope=bot")
-		joinserver_button = Button(label="Invite Bot", url="https://discord.gg/BgmX5V8tQW")
+		joinserver_button = Button(label="Join Support Server", url="https://discord.gg/BgmX5V8tQW")
 
 		view = View()
 		view.add_item(add_bot_button)
