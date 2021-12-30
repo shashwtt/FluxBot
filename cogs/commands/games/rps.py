@@ -12,7 +12,7 @@ class RPS(Cog):
     @commands.command(name="rps", help="Play a calm game of rock, paper, scissors with me :)", aliases=["rockpaperscissors"])
     async def rock_paper_scissors(self, ctx):
         reactions = ["🪨", "🧻", "✂"]
-        embed = discord.Embed(title=f"{ctx.author.mention}, Please Choose an Option", color=0xF59E42)
+        embed = discord.Embed(title=f"{ctx.author.display_name}, Please Choose an Option", color=0xF59E42)
         embed.set_footer(text='You have 10 seconds to choose!')
 
         view = View(timeout=10)
