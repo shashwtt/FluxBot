@@ -36,7 +36,7 @@ class ServerInfo(Cog):
 
         em = discord.Embed(title=f"Here's the information I found on {ctx.guild.name}",
                            color=random.choice(hex_colors.colors))
-        em.set_thumbnail(url=server.icon_url)
+        em.set_thumbnail(url=server.icon.url)
         em.add_field(name='ID', value=server.id, inline=False)
         em.add_field(name='Owner', value=owner, inline=False)
         em.add_field(name='Created on', value=created, inline=False)
