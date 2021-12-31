@@ -52,14 +52,15 @@ async def work(ctx, user_choice_index, interaction: discord.Interaction, view,cl
 		interaction.response.edit_message(embed=result_embed, view=None)
 		view9.stop()
 
-	async def reboot(interaction):
-		await RPS(client_).rock_paper_scissors(ctx, boi=enemy)
+	async def reboot(interactionn):
+		view9.clear_items()
+		interactionn.response.edit_message(embed=result_embed, view=None)
 		view9.stop()
+		await RPS(client_).rock_paper_scissors(ctx, boi=enemy)
 
 	view9.on_timeout = timeup
 	btn = Button(
 		label=f"{random.choice(['Once more!', 'Play again!', 'Moree!'])}",
-		emoji="🔃",
 		style=discord.ButtonStyle.green
 	)
 	btn.callback = reboot
