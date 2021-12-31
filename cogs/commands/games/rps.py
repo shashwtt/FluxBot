@@ -58,8 +58,9 @@ async def work(ctx, user_choice_index, interaction: discord.Interaction, view,cl
 
 	view9.on_timeout = timeup
 	btn = Button(
+		label=f"{random.choice(['Once more!', 'Play again!', 'Moree!'])}",
 		emoji="🔃",
-		style=discord.ButtonStyle.gray
+		style=discord.ButtonStyle.green
 	)
 	btn.callback = reboot
 	view9.add_item(btn)
