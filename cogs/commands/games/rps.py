@@ -10,11 +10,7 @@ import hex_colors
 reactions = ["🪨", "🧻", "✂"]
 
 
-# async retry(ctx, boi):
-# 	Rp
-
-
-async def work(ctx, user_choice_index, interaction: discord.Interaction, view, enemy_index: int = None, enemy=None):
+async def work(ctx, user_choice_index, interaction: discord.Interaction, view,client_, enemy_index: int = None, enemy=None):
 	enemy_choice_index = enemy_index
 	if enemy_index is None:
 		enemy_choice_index = random.randint(0, 2)
@@ -50,28 +46,46 @@ async def work(ctx, user_choice_index, interaction: discord.Interaction, view, e
 		result_embed.colour = 0xE02B2B
 
 	view.stop()
-	await interaction.response.edit_message(embed=result_embed, view=None)
+	view9 = View(timeout=10)
+	async def timeup():
+		view9.clear_items()
+		interaction.response.edit_message(embed=result_embed, view=None)
+		view9.stop()
+
+	async def reboot(interaction):
+		await RPS(client_).rock_paper_scissors(ctx, boi=enemy)
+		view9.stop()
+
+	view9.on_timeout = timeup
+	btn = Button(
+		emoji="🔃",
+		style=discord.ButtonStyle.gray
+	)
+	btn.callback = reboot
+	view9.add_item(btn)
+	await interaction.response.edit_message(embed=result_embed, view=view9)
 
 
 class MySoloView(View):
-	def __init__(self, ctx, timeout):
+	def __init__(self, ctx, timeout, client_):
 		super(MySoloView, self).__init__(timeout=timeout)
 		self.ctx = ctx
+		self.client_ = client_
 
 	@discord.ui.button(style=discord.ButtonStyle.blurple, emoji=f"{reactions[0]}")
 	async def button_click0(self, button, interaction):
 		button.disabled = True
-		await work(self.ctx, 0, interaction, self)
+		await work(self.ctx, 0, interaction, self, self.client_)
 
 	@discord.ui.button(style=discord.ButtonStyle.blurple, emoji=f"{reactions[1]}")
 	async def button_click1(self, button, interaction):
 		button.disabled = True
-		await work(self.ctx, 1, interaction, self)
+		await work(self.ctx, 1, interaction, self, self.client_)
 
 	@discord.ui.button(style=discord.ButtonStyle.blurple, emoji=f"{reactions[2]}")
 	async def button_click2(self, button, interaction):
 		button.disabled = True
-		await work(self.ctx, 2, interaction, self)
+		await work(self.ctx, 2, interaction, self, self.client_)
 
 	async def view_timeout(self) -> None:
 		pass
@@ -87,7 +101,7 @@ class RPS(Cog):
 		aliases=["rockpaperscissors"]
 	)
 	async def rock_paper_scissors(self, ctx, boi: discord.Member = None):
-		view = MySoloView(ctx, timeout=10)
+		view = MySoloView(ctx, timeout=10, client_=self.client)
 
 		if boi is None or boi is self.client.user:
 			embed = discord.Embed(
