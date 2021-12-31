@@ -102,7 +102,7 @@ class RPS(Cog):
 		help="Play a calm game of rock, paper, scissors with me :)",
 		aliases=["rockpaperscissors"]
 	)
-	@cooldown(1,1, BucketType.user)
+	@cooldown(1, 2, BucketType.user)
 	async def rock_paper_scissors(self, ctx, boi: discord.Member = None):
 		view = MySoloView(ctx, timeout=10, client_=self.client)
 
