@@ -10,8 +10,8 @@ import hex_colors
 reactions = ["🪨", "🧻", "✂"]
 
 
-async retry(ctx, boi):
-	Rp
+# async retry(ctx, boi):
+# 	Rp
 
 
 async def work(ctx, user_choice_index, interaction: discord.Interaction, view, enemy_index: int = None, enemy=None):
