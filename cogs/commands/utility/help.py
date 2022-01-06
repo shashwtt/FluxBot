@@ -72,7 +72,6 @@ class Help(Cog):
 			for i in command.aliases:
 				self.aliases[f'{i}'] = str(command)
 
-
 	async def cmd_help(self, ctx, command):  # Makes the embed
 		_aliases = ', '.join([*command.aliases])
 		if _aliases == '':
@@ -121,11 +120,12 @@ class Help(Cog):
 					)
 
 			await ctx.send(f"{command_name}", embed=embed)
-		elif type(command_name) == discord.Member:
-			embed=discord.Embed(
+		elif command_name.startswith("<@") and command_name.endswith(">"):
+			embed = discord.Embed(
 				title="Bro, are you okay?",
 				description="You are supposed to search for command here,\n mentioning someone doesn't make any sense!!"
 			)
+			await ctx.message.reply(embed=embed)
 		else:
 
 			if command_name in self.aliases:

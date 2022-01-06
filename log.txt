@@ -1,0 +1,50 @@
+Opened database successfully
+---------------------------------
+Skipped event : on_command_error
+Loaded event  : on_guild_join
+Loaded event  : on_guild_remove
+Loaded event  : on_ready
+Loaded event  : starboard
+---------------------------------
+--> Loaded command : '8ball'
+--> Loaded command : 'poll'
+--> Loaded command : 'rps'
+--> Loaded command : 'cursed'
+--> Loaded command : 'fact'
+--> Loaded command : 'meme'
+--> Loaded command : 'roast'
+--> Loaded command : 'automod'
+--> Loaded command : 'autorole'
+--> Loaded command : 'ban'
+--> Loaded command : 'clean'
+--> Loaded command : 'delete'
+--> Loaded command : 'kick'
+--> Loaded command : 'mute'
+--> Loaded command : 'nuke'
+--> Loaded command : 'prefix'
+--> Loaded command : 'warn'
+--> Loaded command : 'avatar'
+--> Loaded command : 'editsnipe'
+--> Loaded command : 'enlarge'
+--> Loaded command : 'help'
+--> Loaded command : 'invite'
+--> Loaded command : 'ping'
+--> Loaded command : 'reddit'
+--> Loaded command : 'roleinfo'
+--> Loaded command : 'serverinfo'
+--> Loaded command : 'snipe'
+--> Loaded command : 'starboard'
+--> Loaded command : 'userinfo'
+--------------
+All cogs loaded
+Date: 06 - 01 - 2022
+Time: 15:05
+Servers: 8
+Users: 0
+-------------------
+Executed kick command in kitty Café (ID: 836841936546431006) by Heiwa#8004 (ID: 663675391592103936)
+Ignoring exception in command None:
+discord.ext.commands.errors.CommandNotFound: Command "p" is not found
+Ignoring exception in command None:
+discord.ext.commands.errors.CommandNotFound: Command "p" is not found
+Executed help command in kitty Café (ID: 836841936546431006) by Heiwa#8004 (ID: 663675391592103936)

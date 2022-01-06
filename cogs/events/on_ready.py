@@ -25,7 +25,7 @@ class onReady(commands.Cog):
         print(f"Servers: {(len(self.client.guilds))}")
         print(f"Users: {self.member_count}")
         print("-------------------")
-        await self.client.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name=".help"))
+        await self.client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=".help"))
 
 
 def setup(client):
