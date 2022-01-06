@@ -21,7 +21,6 @@ class Ping(Cog):
 			color=0x42F56C
 		)
 		await context.send(embed=embed)
-		print(open("../../../output.log", "r").read())
 
 
 def setup(client):

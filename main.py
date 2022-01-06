@@ -14,29 +14,6 @@ from dotenv import load_dotenv
 """
 
 
-class Logger(object):
-    def __init__(self, filename="log.txt"):
-        self.terminal = sys.stdout
-        if not os.path.exists(filename):
-            foil = open(filename, "w+")
-            foil.close()
-        self.log = open(filename, "a")
-
-    def write(self, message):
-        self.terminal.write(message)
-        self.log.write(message)
-
-    def flush(self):
-        # this flush method is needed for python 3 compatibility.
-        # this handles the flush command by doing nothing.
-        # you might want to specify some extra behavior here.
-        pass
-
-
-# to keep logging output to a file
-sys.stdout = Logger(filename="output.log")
-
-
 async def create_prefix(guild):
     for channel in guild.text_channels:
         if guild.me.guild_permissions.send_messages and guild.me.guild_permissions.embed_links:
