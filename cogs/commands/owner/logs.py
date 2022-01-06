@@ -11,7 +11,6 @@ class Logs(Cog):
 		self.client = client
 
 	@commands.command(name="logs")
-	@commands.is_owner()
 	async def ping(self, context):
 		"""
 		Get recent bot logs..
