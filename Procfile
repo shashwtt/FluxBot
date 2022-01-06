@@ -1,1 +1,1 @@
-worker: python main.py > log.txt
+worker: python main.py
