@@ -34,7 +34,7 @@ class Logger(object):
 
 
 # to keep logging output to a file
-sys.stdout = Logger()
+sys.stdout = Logger(filename="output.log")
 
 
 async def create_prefix(guild):
