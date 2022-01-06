@@ -15,16 +15,7 @@ class Logs(Cog):
 		"""
 		Get recent bot logs..
 		"""
-		log = open("../../../log.txt", "w+")
-		log.write(str(sys.stdout))
-		log.close()
-
-		file = discord.File(
-			fp="../../../log.txt",
-			filename="Logs.txt",
-			spoiler=True
-		)
-		await context.send(file=file)
+		await context.send(f"{str(sys.stdout)}")
 
 
 def setup(client):
