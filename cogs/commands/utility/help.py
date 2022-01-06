@@ -121,7 +121,11 @@ class Help(Cog):
 					)
 
 			await ctx.send(f"{command_name}", embed=embed)
-		# elif command_name in get_working_cogs():
+		elif type(command_name) == discord.Member:
+			embed=discord.Embed(
+				title="Bro, are you okay?",
+				description="You are supposed to search for command here,\n mentioning someone doesn't make any sense!!"
+			)
 		else:
 
 			if command_name in self.aliases:
