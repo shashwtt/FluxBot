@@ -93,6 +93,10 @@ class Help(Cog):
 		List all commands!
 		"""
 		prefix = get_prefix(ctx.guild.id)
+		command_categories = []
+		for cog in get_working_cogs():
+			command_categories.append(cog.capitalize())
+
 		if command_name == "" or command_name is None:
 			embed = discord.Embed(
 				title="Help",
@@ -126,6 +130,8 @@ class Help(Cog):
 				description="You are supposed to search for command here,\n mentioning someone doesn't make any sense!!"
 			)
 			await ctx.message.reply(embed=embed)
+		elif command_name in command_categories:
+			ctx.send(embed=discord.Embed(title="whoops"))
 		else:
 
 			if command_name in self.aliases:
