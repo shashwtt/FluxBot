@@ -15,7 +15,7 @@ class Logs(Cog):
 		"""
 		Get recent bot logs..
 		"""
-		await context.send(f"{str(sys.stdout)}")
+		await context.send(f"")
 
 
 def setup(client):
