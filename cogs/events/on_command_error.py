@@ -43,7 +43,7 @@ class ErrorHandling(commands.Cog):
             em = discord.Embed(title='Error', color=hex_colors.red)
 
             # This part is copy-pasted from a different source (I don't remember where.)
-            missing = [perm.replace('_', ' ').replace('guild', 'server').title() for perm in error.missing_perms]
+            missing = [perm.replace('_', ' ').replace('guild', 'server').title() for perm in error.missing_permissions]
 
             if len(missing) > 2:
                 permission = '{}, and {}'.format("**, **".join(missing[:-1]), missing[-1])
