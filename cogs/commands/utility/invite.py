@@ -16,11 +16,11 @@ class Invite(commands.Cog):
 		em = discord.Embed(
 			title="I'm glad you asked ```:D```",
 			description=f"\nClick [here](https://top.gg/bot/899263193568936028) to add me to your server\nClick ["
-			f"here](https://discord.gg/BgmX5V8tQW) to join the support server. \n\n Bot created by - <@{owner.id}>"
+			f"here](https://discord.gg/w3AWAjXsqN) to join the support server. \n\n Bot created by - <@{owner.id}>"
 		)
 		em.set_thumbnail(url=self.client.user.avatar.url)
 		add_bot_button = Button(label="Invite Bot", url="https://discord.com/api/oauth2/authorize?client_id=899263193568936028&permissions=0&scope=bot")
-		joinserver_button = Button(label="Join Support Server", url="https://discord.gg/BgmX5V8tQW")
+		joinserver_button = Button(label="Join Support Server", url="https://discord.gg/w3AWAjXsqN")
 
 		view = View()
 		view.add_item(add_bot_button)
