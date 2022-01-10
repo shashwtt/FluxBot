@@ -59,7 +59,7 @@ def get_prefix(_client, message):
 
             return commands.when_mentioned_or(prefix[0])(_client, message)
     except TypeError:
-        create_prefix(message.guild)
+        await create_prefix(message.guild)
 
 
 def get_config():
