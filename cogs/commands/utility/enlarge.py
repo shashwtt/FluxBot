@@ -17,8 +17,10 @@ class EnlargeEmoji(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(name='enlarge', aliases=["enlargeemoji"],
-                      description="Enlarge emojis, you can download them too.")
+    @commands.command(name='emoji',
+                      aliases=["enlargeemoji", "viewemoji"],
+                      help="Enlarge emojis, you can download them too."
+                      )
     async def enlarge(self, ctx, emoji):
         await self.emoji_from_url(ctx, emoji)
 

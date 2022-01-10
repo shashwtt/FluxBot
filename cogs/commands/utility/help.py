@@ -66,11 +66,14 @@ def decorate(command):
 class Help(Cog):
 	def __init__(self, client):
 		self.client = client
-		self.aliases = {}
-		for command in client.commands:
-			self.aliases[f'{command}'] = str(command)
+
+	def get_all_command(self):
+		aliases = {}
+		for command in self.client.commands:
+			aliases[f'{command}'] = str(command)
 			for i in command.aliases:
-				self.aliases[f'{i}'] = str(command)
+				aliases[f'{i}'] = str(command)
+		return aliases
 
 	async def cmd_help(self, ctx, command):  # Makes the embed
 		_aliases = ', '.join([*command.aliases])
@@ -91,7 +94,15 @@ class Help(Cog):
 	async def help(self, ctx, *, command_name=''):
 		prefix = get_prefix(ctx.guild.id)
 		working_cogs = get_working_cogs()
-		pages = []
+
+		if command_name.lower() in self.get_all_command():
+			command_name = self.get_all_command()[f"{command_name}"]
+			command = discord.utils.get(self.client.commands, name=command_name)
+			await self.cmd_help(ctx, command)
+			return
+
+		# A custom url for when a user clicks on a command
+		url = "https://news.rr.nihalnavath.com/posts/Help%20-%20Flux%20Commands-1fc8455b"
 
 		all_page_description = f'**Available command Categories -**\n\n'
 		for x in working_cogs:
@@ -103,25 +114,22 @@ class Help(Cog):
 			color=0xf2cb7d,
 		)
 
-		my_select_view = View()
+		async def my_select_view_timeout():
+			my_select.disabled = True
+			await message.edit(view=my_select_view)
+
+		my_select_view = View(timeout=20)
+		my_select_view.on_timeout = my_select_view_timeout
 		select_options = {
-			"0": "All Commands"
+			"x": "All Commands"
 		}
 
 		for i in range(len(working_cogs)):
 			select_options[str(i)] = working_cogs[i]
 
-		async def my_select_callback(interaction):
-			value_index = my_select.values[0]
-			value = select_options[str(value_index)].lower()
-
-			my_select.placeholder = value.capitalize()
-			if value_index == 0:
-				await interaction.message.edit(embed=all_page, view=my_select_view)
-				return
-
+		def index_commands(value):
 			command_list = []
-			for cmd_name in os.listdir(f"cogs/commands/{value}/"):
+			for cmd_name in os.listdir(f"cogs/commands/{value.lower()}/"):
 				if cmd_name.endswith(".py"):
 					cmd = self.client.get_command(name=cmd_name[:-3])
 					if cmd is None:
@@ -129,17 +137,71 @@ class Help(Cog):
 					cmd_help = cmd.help
 					if cmd_help is None:
 						cmd_help = "No help text provided by developer.."
-					if len(os.listdir(f"cogs/commands/{value}/")) % 5:
-						command_list.append([str(cmd), cmd_help, True])
-					else:
-						command_list.append([str(cmd), cmd_help, False])
+					command_list.append([str(cmd), cmd_help])
+			return command_list
 
-			description = ''
-			for x in range(len(command_list)):
-				description = description + f"\n **[{command_list[x][0]}](https://www.google.com)**\n<:reply:928546470662119444>{command_list[x][1]}"
-			page = discord.Embed(title=f"{value.capitalize()} commands -", description=description)
+		async def paginate(ctx, commands_, value):
 
-			await interaction.message.edit(embed=page, view=my_select_view)
+			paginator_pages = []
+			index = 0
+			while True:
+				description = ''
+				for z in range(0, 5):
+					try:
+						description = description + f"\n **[{commands_[index][0]}]({url})**\n<:reply:928546470662119444>{commands_[index][1]}"
+						index += 1
+					except IndexError:
+						break
+				try:
+					__tempvar = commands_[index]
+					page = discord.Embed(title=f"{value.capitalize()} commands -", description=description)
+					paginator_pages.append(page)
+				except IndexError:
+					page = discord.Embed(title=f"{value.capitalize()} commands -", description=description)
+					paginator_pages.append(page)
+					break
+
+			paginator = Paginator(
+				pages=paginator_pages,
+				show_disabled=True,
+				show_indicator=True,
+				disable_on_timeout=True,
+				timeout=18,
+				custom_view=my_select_view
+			)
+			paginator.customize_button(
+				"prev",
+				button_emoji="<:left:929598591998259322>",
+				button_style=discord.ButtonStyle.primary
+			)
+			paginator.customize_button(
+				"next",
+				button_emoji="<:right:929598592220557392>",
+				button_style=discord.ButtonStyle.primary
+			)
+
+			await paginator.edit(ctx, message=message)
+
+		async def my_select_callback(interaction):
+			value_index = my_select.values[0]
+			value = select_options[str(value_index)].lower()
+
+			my_select.placeholder = value.capitalize()
+			if my_select.values[0] == 'x':
+				await interaction.message.edit(embed=all_page, view=my_select_view)
+				return
+
+			command_list = index_commands(value)
+
+			if len(command_list) > 5:
+				await paginate(ctx, command_list, value)
+			else:
+				description = ''
+				for x in range(len(command_list)):
+					description = description + f"\n **[{command_list[x][0]}]({url})**\n<:reply:928546470662119444>{command_list[x][1]}"
+
+				page = discord.Embed(title=f"{value.capitalize()} commands -", description=description)
+				await interaction.message.edit(embed=page, view=my_select_view)
 
 		my_select = Select(
 			min_values=1,
@@ -147,54 +209,24 @@ class Help(Cog):
 			placeholder="Select Command Category"
 		)
 
-		for i in range(len(working_cogs)):
-			my_select.add_option(label=select_options[str(i)].capitalize(), value=str(i))
+		for i in select_options.keys():
+			my_select.add_option(label=select_options[i].capitalize(), value=str(i))
 
 		my_select.callback = my_select_callback
 		my_select_view.add_item(my_select)
 
-		await ctx.send(embed=all_page, view=my_select_view)
-
-		# for cog in working_cogs:
-		# 	command_list = []
-		# 	for cmd_name in os.listdir(f"cogs/commands/{cog}/"):
-		# 		if cmd_name.endswith(".py"):
-		# 			cmd = self.client.get_command(name=cmd_name[:-3])
-		# 			if cmd is None:
-		# 				continue
-		# 			cmd_help = cmd.help
-		# 			if cmd_help is None:
-		# 				cmd_help = "No help text provided by developer.."
-		# 			command_list.append([str(cmd), cmd_help])
-		# 	description = ''
-		# 	for x in range(len(command_list)):
-		# 		description = description + f"\n **[{command_list[x][0]}](https://www.google.com)**\n<:reply:928546470662119444>{command_list[x][1]}"
-		# 	page = discord.Embed(title=f"{cog.capitalize()} commands -", description=description)
-		# 	pages.append(page)
-
-		pass
-
-	# paginator = Paginator(
-	# 	pages=pages,
-	# 	show_disabled=True,
-	# 	show_indicator=True,
-	# 	disable_on_timeout=True,
-	# 	timeout=15,
-	# 	custom_view=my_select_view
-	# )
-	#
-	# paginator.customize_button(
-	# 	"prev",
-	# 	button_emoji="<:left:929598591998259322>",
-	# 	button_style=discord.ButtonStyle.primary
-	# )
-	# paginator.customize_button(
-	# 	"next",
-	# 	button_emoji="<:right:929598592220557392>",
-	# 	button_style=discord.ButtonStyle.primary
-	# )
-	#
-	# await paginator.send(ctx)
+		if command_name == "" or command_name is None:
+			message = await ctx.send(embed=all_page, view=my_select_view)
+		elif command_name.lower() in working_cogs:
+			my_select_view.placeholder = f"{command_name.capitalize()}"
+			category_cmd_list = index_commands(command_name.lower())
+			des = ''
+			for x in range(len(category_cmd_list)):
+				des = des + f"\n **[{category_cmd_list[x][0]}]({url})**\n<:reply:928546470662119444>{category_cmd_list[x][1]}"
+			page = discord.Embed(title=f"{command_name.capitalize()} commands -", description=des)
+			message = await ctx.send(embed=page, view=my_select_view)
+		elif len(command_name) > 0 and command_name.lower() not in self.get_all_command():
+			message = await ctx.send(embed=all_page, view=my_select_view)
 
 
 # async def help(self, ctx, *, command_name=''):

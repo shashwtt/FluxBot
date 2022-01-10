@@ -216,11 +216,6 @@ class Paginator(discord.ui.View):
 
         self.clear_items()
 
-        # if custom view is given
-        if self.custom_view:
-            for item in self.custom_view.children:
-                self.add_item(item)
-
         if self.show_indicator:
             self.buttons["page_indicator"]["object"].label = f"{self.current_page + 1}/{self.page_count + 1}"
         for key, button in self.buttons.items():
@@ -237,6 +232,11 @@ class Paginator(discord.ui.View):
 
         # We're done adding standard buttons, so we can now add any specified custom view items below them
         # The bot developer should handle row assignments for their view before passing it to Paginator
+
+        # if custom view is given
+        if self.custom_view:
+            for item in self.custom_view.children:
+                self.add_item(item)
 
         return self.buttons
 
