@@ -24,12 +24,12 @@ class Nuke(commands.Cog):
 		def check(reaction, user):
 			return user == ctx.message.author and str(reaction) in reactions
 
-		def cancel_click(Interaction):
-			await choices.edit(embed=discord.Embed(title="Okay, cancelled the nuke!", colour=hex_colors.l_green), view=None)
+		async def cancel_click(interaction):
+			await interaction.message.edit(embed=discord.Embed(title="Okay, cancelled the nuke!", colour=hex_colors.l_green), view=None)
 			await choices.delete(delay=5)
 			return
 
-		def ok_click(Interaction):
+		async def ok_click(interaction):
 			try:
 				new_channel = await channel.clone(
 					reason=f'Original was nuked by {ctx.author}')  # Reason to be registered in the audit log
