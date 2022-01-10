@@ -92,7 +92,7 @@ def load_commands():
                     try:
                         bot.load_extension(f"cogs.commands.{folder}.{cmd}")
                         print(f"--> Loaded command : '{cmd}'")
-                    except discord.ext.commands.ExtensionAlreadyLoaded:
+                    except discord.ExtensionAlreadyLoaded:
                         print("---------------------------------")
                         continue
                     except Exception as e:
