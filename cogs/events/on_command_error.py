@@ -28,7 +28,7 @@ def get_prefix(guild):
 class ErrorHandling(commands.Cog):
     def __init__(self, client):
         self.client = client
-        with open("../../../config.json", 'r') as config_file:
+        with open("config.json", 'r') as config_file:
             self.config = json.load(config_file)
             config_file.close()
 
