@@ -28,6 +28,9 @@ def get_prefix(guild):
 class ErrorHandling(commands.Cog):
     def __init__(self, client):
         self.client = client
+        with open("../../../config.json", 'r') as config_file:
+            self.config = json.load(config_file)
+            config_file.close()
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
@@ -122,7 +125,7 @@ class ErrorHandling(commands.Cog):
                 description="An error occurred that I wasn't able to handle myself. This has been conveyed to my developer.",
                 color=hex_colors.m_red
             ))
-            channel = self.client.get_channel(930101987377291344)  # Enter your channel ID here
+            channel = self.client.get_channel(self.congig['err_channel'])  # Enter your channel ID here
 
             em = discord.Embed(title='Error', color=0xFF3E3E)
 
