@@ -10,17 +10,10 @@ from discord.ext.commands import PartialEmojiConverter
 
 
 class EnlargeEmoji(commands.Cog):
-    """
-    This is going to be almost same as the steal_emoji.py
-    """
-
     def __init__(self, client):
         self.client = client
 
-    @commands.command(name='emoji',
-                      aliases=["enlargeemoji", "viewemoji"],
-                      help="Enlarge emojis, you can download them too."
-                      )
+    @commands.command(name='emoji', aliases=["enlargeemoji", "viewemoji"], help="Enlarge emojis, you can download them too.")
     async def enlarge(self, ctx, emoji):
         await self.emoji_from_url(ctx, emoji)
 

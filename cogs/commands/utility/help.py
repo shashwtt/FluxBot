@@ -146,7 +146,7 @@ class Help(Cog):
 			index = 0
 			while True:
 				description = ''
-				for z in range(0, 5):
+				for z in range(0, 7):
 					try:
 						description = description + f"\n **[{commands_[index][0]}]({url})**\n<:reply:928546470662119444>{commands_[index][1]}"
 						index += 1
@@ -193,7 +193,7 @@ class Help(Cog):
 
 			command_list = index_commands(value)
 
-			if len(command_list) > 5:
+			if len(command_list) > 7:
 				await paginate(ctx, command_list, value)
 			else:
 				description = ''
