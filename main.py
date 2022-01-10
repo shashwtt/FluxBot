@@ -35,7 +35,7 @@ async def create_prefix(guild):
     conn.commit()
 
 
-def get_prefix(_client, message):
+async def get_prefix(_client, message):
     """
     Function to get prefix for a guild
     """
@@ -132,11 +132,11 @@ config = get_config()
 """
 
 bot = commands.Bot(
-    command_prefix=get_prefix,
+    command_prefix=await get_prefix,
     intents=intents,
     case_insensitive=True,
     allowed_mentions=discord.AllowedMentions(everyone=False),
-    owner_ids=['663675391592103936']
+    owner_ids=config['owner']
 )
 
 # Removes the default help command of discord.py to be able to create our custom help command.
