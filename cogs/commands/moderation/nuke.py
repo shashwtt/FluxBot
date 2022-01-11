@@ -29,6 +29,7 @@ class Nuke(commands.Cog):
 			if interaction.user.guild_permissions.administrator:
 				await interaction.message.edit(embed=discord.Embed(description=f"Cancelled the nuke, on behalf of {interaction.user.mention}", colour=hex_colors.l_green), view=None)
 				await choices.delete(delay=5)
+				view.stop()
 				return
 			else:
 				pass
