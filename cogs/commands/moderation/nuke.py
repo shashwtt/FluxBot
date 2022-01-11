@@ -16,13 +16,14 @@ class Nuke(commands.Cog):
 		if channel is None:
 			channel = ctx.channel
 
-		reactions = {
-			"✅": 0,
-			"❌": 1
-		}
-
-		def check(reaction, user):
-			return user == ctx.message.author and str(reaction) in reactions
+		async def view_timeout():
+			timeup_embed = discord.Embed(
+				title="Time up!!",
+				description="The nuke was cancelled because you were too late to respond.."
+			)
+			await choices.edit(embed=timeup_embed, view=None)
+			await choices.delete(delay=5)
+			return
 
 		async def cancel_click(interaction):
 			await interaction.message.edit(embed=discord.Embed(title="Okay, cancelled the nuke!", colour=hex_colors.l_green), view=None)
