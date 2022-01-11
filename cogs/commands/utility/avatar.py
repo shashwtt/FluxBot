@@ -24,7 +24,7 @@ class Avatar(Cog):
 		if member is None:
 			member = ctx.author
 
-		reverse_butt = Button(emoji="<:reverse:926099714544390194>")
+		reverse_butt = Button(emoji="<:uno_reverse:930372912584720434>")
 
 		async def view_timeout():
 			view.remove_item(reverse_butt)

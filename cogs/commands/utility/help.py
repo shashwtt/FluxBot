@@ -171,12 +171,12 @@ class Help(Cog):
 			)
 			paginator.customize_button(
 				"prev",
-				button_emoji="<:left:929598591998259322>",
+				button_emoji="<:left:930372441249808415>",
 				button_style=discord.ButtonStyle.primary
 			)
 			paginator.customize_button(
 				"next",
-				button_emoji="<:right:929598592220557392>",
+				button_emoji="<:right:930372441220472863>",
 				button_style=discord.ButtonStyle.primary
 			)
 
