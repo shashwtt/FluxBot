@@ -125,7 +125,7 @@ class ErrorHandling(commands.Cog):
                 description="An error occurred that I wasn't able to handle myself. This has been conveyed to my developer.",
                 color=hex_colors.m_red
             ))
-            channel = self.client.get_channel(self.congig['err_channel'])  # Enter your channel ID here
+            channel = self.client.get_channel(self.config['err_channel'])  # Enter your channel ID here
 
             em = discord.Embed(title='Error', color=0xFF3E3E)
 
