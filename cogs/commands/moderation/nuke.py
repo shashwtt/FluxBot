@@ -65,7 +65,7 @@ class Nuke(commands.Cog):
 		view.on_timeout = view_timeout
 
 		confirmation = discord.Embed(
-			description=f"Are you sure you want to nuke `{ctx.channel}`?",
+			description=f"Are you sure you want to nuke <#{ctx.channel.id}>?",
 			color=0xF59E42
 		)
 		choices = await ctx.send(embed=confirmation, view=view)
