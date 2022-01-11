@@ -56,6 +56,7 @@ class Nuke(commands.Cog):
 		cancel_butt = discord.ui.Button(emoji="❌")
 		cancel_butt.callback = cancel_click
 		view.add_item(cancel_butt)
+		view.on_timeout = view_timeout()
 
 		confirmation = discord.Embed(
 			title="Are you sure you want to proceed?",
