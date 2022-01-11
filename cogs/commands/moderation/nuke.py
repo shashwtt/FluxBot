@@ -26,8 +26,8 @@ class Nuke(commands.Cog):
 			return
 
 		async def cancel_click(interaction):
-			if interaction.user == ctx.author:
-				await interaction.message.edit(embed=discord.Embed(title="Okay, cancelled the nuke!", colour=hex_colors.l_green), view=None)
+			if interaction.user.guild_permissions.administrator:
+				await interaction.message.edit(embed=discord.Embed(description=f"Cancelled the nuke, on behalf of {interaction.user.mention}", colour=hex_colors.l_green), view=None)
 				await choices.delete(delay=5)
 				return
 			else:
