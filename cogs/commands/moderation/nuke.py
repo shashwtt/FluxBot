@@ -50,13 +50,13 @@ class Nuke(commands.Cog):
 			await new_channel.send(embed=em)
 
 		view = discord.ui.View(timeout=15)
-		ok_butt = discord.ui.Button(emoji="<:check_green:930372441790902292>")
+		ok_butt = discord.ui.Button(emoji="<:check_white:930372441107218472>", style=discord.ButtonStyle.green)
 		ok_butt.callback = ok_click
 		view.add_item(ok_butt)
-		cancel_butt = discord.ui.Button(emoji="❌")
+		cancel_butt = discord.ui.Button(emoji="<:x_white:930381127535984641>", style=discord.ButtonStyle.red)
 		cancel_butt.callback = cancel_click
 		view.add_item(cancel_butt)
-		view.on_timeout = view_timeout()
+		view.on_timeout = view_timeout
 
 		confirmation = discord.Embed(
 			title="Are you sure you want to proceed?",
