@@ -56,17 +56,16 @@ class Nuke(commands.Cog):
 			await new_channel.send(embed=em)
 
 		view = discord.ui.View(timeout=15)
-		ok_butt = discord.ui.Button(emoji="<:check_green:930391361696436224>", style=discord.ButtonStyle.gray)
+		ok_butt = discord.ui.Button(label="Nuke!", style=discord.ButtonStyle.green)
 		ok_butt.callback = ok_click
 		view.add_item(ok_butt)
-		cancel_butt = discord.ui.Button(emoji="<:x_white:930381127535984641>", style=discord.ButtonStyle.gray)
+		cancel_butt = discord.ui.Button(label="Cancel!", style=discord.ButtonStyle.danger)
 		cancel_butt.callback = cancel_click
 		view.add_item(cancel_butt)
 		view.on_timeout = view_timeout
 
 		confirmation = discord.Embed(
-			title="Are you sure you want to proceed?",
-			description="<:check_green:930391361696436224> - Go ahead and Nuke\n\n❌ - Cancel the nuking!",
+			description=f"Are you sure you want to nuke `{ctx.channel}`?",
 			color=0xF59E42
 		)
 		choices = await ctx.send(embed=confirmation, view=view)
