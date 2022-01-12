@@ -16,8 +16,7 @@ class Ping(Cog):
 		Check if the bot is alive.
 		"""
 		embed = discord.Embed(
-			title="🏓 Pong!",
-			description=f"The bot latency is {round(self.client.latency * 1000)}ms.",
+			title="🏓 Pong, The bot is running smooth and sharp!",
 			color=0x42F56C
 		)
 		await context.send(embed=embed)
