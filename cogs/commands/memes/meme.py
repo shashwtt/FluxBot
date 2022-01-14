@@ -51,7 +51,7 @@ class Meme(Cog):
         meme_view.add_item(close_view)
         meme_view.on_timeout = close_meme_view
 
-        ctx.message.emed.title = title
+        ctx.message.embed.title = title
         ctx.message.embed.set_imgage(url=image)
         ctx.message.embed.set_footer(text=f"👍 {post['ups']} | Posted by - [u/{post['author']}](https://www.reddit.com/u/{post['author']})")
 
