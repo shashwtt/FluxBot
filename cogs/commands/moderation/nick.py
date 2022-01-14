@@ -34,8 +34,9 @@ class Nick(commands.Cog):
             colour=discord.Colour.yellow()
         )
         embed.add_field(name="nickname before -", value=f"```{before_nick}```", inline=False)
-        embed.add_field(name="nickname now -", value=f"```{user.nick}```", inline=False)
+        embed.add_field(name="nickname now -", value=f"```{nickname}```", inline=False)
         await ctx.send(embed=embed)
+
 
 def setup(client):
     client.add_cog(Nick(client))
