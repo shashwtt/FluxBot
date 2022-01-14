@@ -55,7 +55,7 @@ class Meme(Cog):
         ctx.message.embeds[0].set_imgage(url=image)
         ctx.message.embeds[0].set_footer(text=f"👍 {post['ups']} | Posted by - [u/{post['author']}](https://www.reddit.com/u/{post['author']})")
 
-        interaction.message.edit(embed=ctx.message.embeds[0], view=meme_view)
+        await interaction.message.edit(embed=ctx.message.embeds[0], view=meme_view)
 
     @commands.command(name='meme', aliases=['maymay', 'm'], help="Brings a post from meme subreddits..")
     @cooldown(1, 3, BucketType.user)
