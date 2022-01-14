@@ -48,6 +48,8 @@ class Meme(Cog):
         close_view = discord.ui.Button(emoji="<:x_white:930381127535984641>", style=discord.ButtonStyle.danger)
         close_view.callback = close_meme_view
         meme_view.add_item(next_meme)
+        meme_view.add_item(close_view)
+        meme_view.on_timeout = close_meme_view
 
         ctx.message.emed.title = title
         ctx.message.embed.set_imgage(url=image)
@@ -79,6 +81,8 @@ class Meme(Cog):
         close_view = discord.ui.Button(emoji="<:x_white:930381127535984641>", style=discord.ButtonStyle.danger)
         close_view.callback = close_meme_view
         meme_view.add_item(next_meme)
+        meme_view.add_item(close_view)
+        meme_view.on_timeout = close_meme_view
 
         em = discord.Embed(
             title=title,
