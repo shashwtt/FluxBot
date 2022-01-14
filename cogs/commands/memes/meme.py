@@ -51,11 +51,11 @@ class Meme(Cog):
         meme_view.add_item(close_view)
         meme_view.on_timeout = close_meme_view
 
-        ctx.message.embed.title = title
-        ctx.message.embed.set_imgage(url=image)
-        ctx.message.embed.set_footer(text=f"👍 {post['ups']} | Posted by - [u/{post['author']}](https://www.reddit.com/u/{post['author']})")
+        ctx.message.embeds[0].title = title
+        ctx.message.embeds[0].set_imgage(url=image)
+        ctx.message.embeds[0].set_footer(text=f"👍 {post['ups']} | Posted by - [u/{post['author']}](https://www.reddit.com/u/{post['author']})")
 
-        interaction.message.edit(embed=ctx.message.embed, view=meme_view)
+        interaction.message.edit(embed=ctx.message.embeds[0], view=meme_view)
 
     @commands.command(name='meme', aliases=['maymay', 'm'], help="Brings a post from meme subreddits..")
     @cooldown(1, 3, BucketType.user)
