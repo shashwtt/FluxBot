@@ -69,7 +69,7 @@ class Meme(Cog):
 			meme_view.stop()
 			meme_view.clear_items()
 			if interaction is None:
-				message.edit(view=None)
+				await message.edit(view=None)
 			else:
 				await interaction.message.edit(view=None)
 
