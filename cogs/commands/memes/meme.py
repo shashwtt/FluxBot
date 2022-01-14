@@ -51,7 +51,7 @@ class Meme(Cog):
 		post = meme[0]
 		image = meme[1]
 		title = meme[2]
-		meme_view = discord.ui.View(timeout=15)
+		meme_view = discord.ui.View(timeout=5)
 		next_meme = discord.ui.Button(label="Next meme!", style=discord.ButtonStyle.green)
 		next_meme.callback = next_meme_callback
 		close_view = discord.ui.Button(emoji="<:x_white:930381127535984641>", style=discord.ButtonStyle.danger)
