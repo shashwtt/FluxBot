@@ -23,7 +23,7 @@ class Nick(commands.Cog):
                 colour=discord.Colour.brand_red()
             )
             embed_err.set_footer(text="Choose a shorter nickname!")
-            await ctx.send(embed=embed_err)
+            await ctx.message.reply(embed=embed_err)
             return
 
         await user.edit(nick=nickname)
@@ -33,7 +33,7 @@ class Nick(commands.Cog):
         )
         embed.add_field(name="nickname before -", value=user.nick)
         embed.add_field(name="nickname now -", value=nickname)
-        await ctx.send()
+        await ctx.send(embed=embed)
 
 def setup(client):
     client.add_cog(Nick(client))
