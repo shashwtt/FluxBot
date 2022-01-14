@@ -13,11 +13,8 @@ class Poll(Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(name="poll", aliases=["vote"])
+    @commands.command(name="poll", aliases=["vote"], help="Create a poll where members can vote.")
     async def poll(self, context, *, title):
-        """
-        Create a poll where members can vote.
-        """
         embed = discord.Embed(
             title="A new poll has been created!",
             description=f"{title}",
