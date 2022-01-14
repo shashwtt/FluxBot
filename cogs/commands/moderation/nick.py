@@ -18,6 +18,8 @@ class Nick(commands.Cog):
             return
 
         before_nick = user.nick
+        if before_nick is None:
+            before_nick = user.name
 
         if len(nickname) > 32:
             embed_err = discord.Embed(
