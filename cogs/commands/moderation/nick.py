@@ -14,9 +14,8 @@ class Nick(commands.Cog):
                       help='Manage server nickname..')
     @commands.bot_has_permissions(manage_nicknames=True)
     async def nick(self, ctx, user: discord.Member, *, nickname):
-        if not ctx.author.has_permissions(manage_nicknames=True):
-            if ctx.author != user:
-                return
+        if not ctx.author.guild_permissions.manage_nicknames and ctx.author != user:
+            return
 
         if len(nickname) > 32:
             embed_err = discord.Embed(
