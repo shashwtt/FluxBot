@@ -25,13 +25,13 @@ class Nick(commands.Cog):
             await ctx.send(embed=embed_err)
             return
 
-        new_user = await user.edit(nick=nickname)
+        await user.edit(nick=nickname)
         embed = discord.Embed(
             description=f"{user.mention}'s nickname was changed by {ctx.author.mention}!",
             colour=discord.Colour.brand_green()
         )
         embed.add_field(name="nickname before -", value=user.nick)
-        embed.add_field(name="nickname now -", value=new_user.nick)
+        embed.add_field(name="nickname now -", value=nickname)
         await ctx.send()
 
 def setup(client):
