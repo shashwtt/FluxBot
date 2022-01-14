@@ -17,6 +17,8 @@ class Nick(commands.Cog):
         if not ctx.author.guild_permissions.manage_nicknames and ctx.author != user:
             return
 
+        before_nick = user.nick
+
         if len(nickname) > 32:
             embed_err = discord.Embed(
                 description="A nickname cannot be longer than 32 digits...",
@@ -31,8 +33,8 @@ class Nick(commands.Cog):
             description=f"{user.name}'s nickname was changed by {ctx.author.mention}!",
             colour=discord.Colour.yellow()
         )
-        embed.add_field(name="nickname before -", value=f"```{user.nick}```", inline=True)
-        embed.add_field(name="nickname now -", value=f"```{nickname}```", inline=True)
+        embed.add_field(name="nickname before -", value=f"```{before_nick}```", inline=True)
+        embed.add_field(name="nickname now -", value=f"```{user.nick}```", inline=True)
         await ctx.send(embed=embed)
 
 def setup(client):
