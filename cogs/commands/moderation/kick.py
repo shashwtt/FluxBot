@@ -31,13 +31,10 @@ class Kick(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 
-	@commands.command(name='kick', help='Kick a member from the Server, also deleting their messages')
+	@commands.command(name='kick', help='Kick a member from the Server...')
 	@commands.has_permissions(kick_members=True)
 	@commands.bot_has_permissions(kick_members=True)
-	async def soft_ban(self, ctx, member: discord.Member = None, *, reason="No Reason Provided.."):
-		"""
-		It's same as the ban command, but better and its kick command, lol.
-		"""
+	async def kick(self, ctx, member: discord.Member = None, *, reason="No Reason Provided.."):
 
 		prefix = get_prefix(ctx.guild.id)
 		if member is None:
