@@ -19,16 +19,17 @@ class Nick(commands.Cog):
 
         if len(nickname) > 32:
             embed_err = discord.Embed(
-                description="A nickname cannot be longer than 32 digits...\n\nChoose a shorter nickname!",
-                colour=discord.Colour.yellow()
+                description="A nickname cannot be longer than 32 digits...",
+                colour=discord.Colour.brand_red()
             )
+            embed_err.set_footer(text="Choose a shorter nickname!")
             await ctx.send(embed=embed_err)
             return
 
         await user.edit(nick=nickname)
         embed = discord.Embed(
             description=f"{user.mention}'s nickname was changed by {ctx.author.mention}!",
-            colour=discord.Colour.brand_green()
+            colour=discord.Colour.yellow()
         )
         embed.add_field(name="nickname before -", value=user.nick)
         embed.add_field(name="nickname now -", value=nickname)
