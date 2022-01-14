@@ -34,7 +34,7 @@ class Meme(Cog):
 
         async def next_meme_callback(interaction):
             x = await send_meme()
-            interaction.message.edit(embed=x[0], view=x[1])
+            await interaction.message.edit(embed=x[0], view=x[1])
 
         async def send_meme():
             meme = get_meme()
@@ -54,7 +54,7 @@ class Meme(Cog):
             return [em, meme_view]
 
         x = await send_meme()
-        ctx.send(embed=x[0], view=x[1])
+        await ctx.send(embed=x[0], view=x[1])
 
 
 def setup(client):
