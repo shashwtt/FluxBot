@@ -1,10 +1,5 @@
-import random
-import sys
-
 import discord
-import requests
-
-import hex_colors
+import os
 
 from discord.ext import commands
 from discord.ext.commands import cooldown, BucketType, Cog
@@ -26,7 +21,7 @@ class Reboot(Cog):
                 color=0x42F56C
             )
             await ctx.send(embed=embed)
-            await self.bot.close()
+            os.system("heroku restart -a flux-discord")
         else:
             return
 
