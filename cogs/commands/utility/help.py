@@ -30,11 +30,8 @@ def get_prefix(guild):
 
 async def check_field(ctx, cog, _client):
 	cog = cog.lower()
-	if cog == "owner":
-		if await _client.is_owner(ctx.author):
-			return True
-		else:
-			return False
+	if cog == "owner" and ctx.author not in _client.owner_ids:
+		return False
 	return True
 
 
