@@ -21,7 +21,7 @@ class Reboot(Cog):
                 color=0x42F56C
             )
             await ctx.send(embed=embed)
-            await self.bot.close()
+            await self.client.close()
             # os.system("heroku restart -a flux-discord")
         else:
             return
