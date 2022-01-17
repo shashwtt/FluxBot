@@ -17,6 +17,8 @@ class onReady(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
+        await self.client.wait_until_ready()
+
         print('--------------')
         print('All cogs loaded')
         # Since I host the bot on heroku, I'd like to know in the logs when the bot started/restarted in my own timezone
