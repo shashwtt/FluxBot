@@ -1,3 +1,4 @@
+import asyncio
 import discord
 
 from discord.ext import commands
@@ -9,7 +10,6 @@ from pypresence import Presence
 class onReady(commands.Cog):
 	def __init__(self, client):
 		self.client = client
-		self.RPC = Presence("877142422700834816")
 
 	def get_member_count(self):
 		karen = self.client.users
@@ -26,15 +26,16 @@ class onReady(commands.Cog):
 		print(f"Users: {self.get_member_count()}")
 		print("-------------------")
 
-		self.RPC.connect()
-		print(self.RPC.update(
+		RPC = Presence(client_id="877142422700834816")
+		RPC.connect()
+		RPC.update(
 			state="Flux",
 			details="Multipurpose discord bot",
 			large_image="flux-512x",
 			small_text="Flux - discord bot",
 			large_text="Flux - discord bot",
 			buttons=[{"label": "Join Support Server!", "url": "https://discord.gg/TwBdVR5TXN"}]
-		))
+		)
 
 		# await self.client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=f"{self.get_member_count()} users!"))
 

@@ -35,8 +35,8 @@ class UnBan(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 
-	@commands.command(name='ban', help='pardon/unban a banned member from the server!', usage='<member> <reason>')
-	@commands.has_permissions(un=True)
+	@commands.command(name='unban', help='pardon/unban a banned member from the server!', usage='<member> <reason>')
+	@commands.has_permissions(ban_members=True)
 	@commands.bot_has_permissions(ban_members=True)
 	async def unban(self, ctx, member: discord.Member, *, reason="No reason provided"):
 		try:
