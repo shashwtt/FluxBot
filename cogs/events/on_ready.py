@@ -16,21 +16,27 @@ class onReady(commands.Cog):
 			await self.client.change_presence(
 				activity=discord.Activity(
 					type=discord.ActivityType.listening,
-					name='-help'
+					name=f'-help | {len(self.client.guilds)} servers'
 				))
-			await sleep(15)
+			await sleep(5)
 			await self.client.change_presence(
 				activity=discord.Activity(
-					type=discord.ActivityType.watching,
-					name=f" {len(self.client.guilds)} servers"
+					type=discord.ActivityType.listening,
+					name=f'-help | {len(self.client.users)} users'
 				))
-			await sleep(15)
-			await self.client.change_presence(
-				activity=discord.Activity(
-					type=discord.ActivityType.watching,
-					name=f" {len(self.client.users)} users"
-				))
-			await sleep(15)
+			await sleep(5)
+			# await self.client.change_presence(
+			# 	activity=discord.Activity(
+			# 		type=discord.ActivityType.watching,
+			# 		name=f" {len(self.client.guilds)} servers"
+			# 	))
+			# await sleep(15)
+			# await self.client.change_presence(
+			# 	activity=discord.Activity(
+			# 		type=discord.ActivityType.watching,
+			# 		name=f" {len(self.client.users)} users"
+			# 	))
+			# await sleep(15)
 
 	@commands.Cog.listener()
 	async def on_ready(self):
