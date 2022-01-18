@@ -1,19 +1,36 @@
-import asyncio
 import discord
 
 from discord.ext import commands
 from pytz import timezone
 from datetime import datetime
-from pypresence import Presence
+from asyncio import sleep
 
 
 class onReady(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 
-	def get_member_count(self):
-		karen = self.client.users
-		return len(karen)
+	async def status(self):
+		while True:
+			await self.client.wait_until_ready()
+			await self.client.change_presence(
+				activity=discord.Activity(
+					type=discord.ActivityType.listening,
+					name='-help'
+				))
+			await sleep(15)
+			await self.client.change_presence(
+				activity=discord.Activity(
+					type=discord.ActivityType.watching,
+					name=f" {len(self.client.guilds)} servers"
+				))
+			await sleep(15)
+			await self.client.change_presence(
+				activity=discord.Activity(
+					type=discord.ActivityType.watching,
+					name=f" {len(self.client.users)} users"
+				))
+			await sleep(15)
 
 	@commands.Cog.listener()
 	async def on_ready(self):
@@ -23,21 +40,10 @@ class onReady(commands.Cog):
 		print("Date:", datetime.now(timezone('Asia/Kolkata')).strftime('%d - %m - %Y'))
 		print("Time:", datetime.now(timezone('Asia/Kolkata')).strftime('%H:%M'))
 		print(f"Servers: {(len(self.client.guilds))}")
-		print(f"Users: {self.get_member_count()}")
+		print(f"Users: {len(self.client.users)}")
 		print("-------------------")
 
-		RPC = Presence(client_id="877142422700834816")
-		RPC.connect()
-		RPC.update(
-			state="Flux",
-			details="Multipurpose discord bot",
-			large_image="flux-512x",
-			small_text="Flux - discord bot",
-			large_text="Flux - discord bot",
-			buttons=[{"label": "Join Support Server!", "url": "https://discord.gg/TwBdVR5TXN"}]
-		)
-
-		# await self.client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=f"{self.get_member_count()} users!"))
+		self.client.loop.create_task(self.status())
 
 
 def setup(client):
