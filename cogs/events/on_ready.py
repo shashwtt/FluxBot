@@ -3,9 +3,8 @@ import discord
 from discord.ext import commands
 from pytz import timezone
 from datetime import datetime
-from asyncio import sleep
 from pypresence import Presence
-import time
+
 
 class onReady(commands.Cog):
 	def __init__(self, client):
@@ -34,6 +33,7 @@ class onReady(commands.Cog):
 			large_image="flux-512x",
 			small_text="Flux - discord bot",
 			large_text="Flux - discord bot",
+			buttons=[{"label": "Join Support Server!", "url": "https://discord.gg/TwBdVR5TXN"}]
 		))
 
 		# await self.client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=f"{self.get_member_count()} users!"))
