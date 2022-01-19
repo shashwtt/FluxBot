@@ -31,7 +31,7 @@ class Fact(Cog):
             async with session.get("https://uselessfacts.jsph.pl/random.json?language=en") as request:
                 if request.status == 200:
                     data = await request.json()
-                    fact = data['text'].replace("`", "'")
+                    fact = data['text']
                     embed = discord.Embed(description=fact, color=0xD75BF4)
                     await context.send(embed=embed)
                 else:
