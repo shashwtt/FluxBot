@@ -21,8 +21,8 @@ class Ping(Cog):
 			color=0x42F56C
 		)
 		custom_view = View()
-		custom_url = 'https://discordapp.com/channels/@me/663675391592103936'
-		custom_label = 'Report a problem!'
+		custom_url = 'https://discord.gg/meCMJRYGvp'
+		custom_label = 'Report an Issue!'
 		custom_button = Button(label=custom_label, url=custom_url)
 		custom_view.add_item(custom_button)
 
