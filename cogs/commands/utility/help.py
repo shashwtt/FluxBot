@@ -28,20 +28,23 @@ def get_prefix(guild):
 	return prefix
 
 
-async def check_field(ctx, cog, _client):
+def check_field(ctx, cog, _client):
 	cog = cog.lower()
-	if cog == "owner" and ctx.author not in _client.owner_ids:
-		return False
+	# print(f"Author id - {ctx.author.id}\nAll Ids - {_client.owner_ids}")
+	if cog == "owner":
+		if ctx.author.id not in _client.owner_ids:
+			return False
 	return True
 
 
-def get_working_cogs():
+def get_working_cogs(ctx, client):
 	cogs = []
 	for cog in os.listdir("cogs/commands/"):
 		if os.path.isdir(f"cogs/commands/{cog}"):
-			if cog != "owner" and cog != "__pycache__":
+			if cog != "__pycache__":
 				if len(os.listdir(f"cogs/commands/{cog}")) != 0:
-					cogs.append(cog)
+					if check_field(ctx, cog, client):
+						cogs.append(cog)
 	return cogs
 
 
@@ -87,10 +90,10 @@ class Help(Cog):
 
 		await ctx.send(embed=em)
 
-	@commands.command(name="help")
+	@commands.command(name="help", aliases=['h'], description="Get help on a command or the Bot!")
 	async def help(self, ctx, *, command_name=''):
 		prefix = get_prefix(ctx.guild.id)
-		working_cogs = get_working_cogs()
+		working_cogs = get_working_cogs(ctx, self.client)
 
 		if command_name.lower() in self.get_all_command():
 			command_name = self.get_all_command()[f"{command_name}"]
