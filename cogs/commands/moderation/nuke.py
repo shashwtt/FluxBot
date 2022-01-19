@@ -41,6 +41,8 @@ class Nuke(commands.Cog):
 						reason=f'Original was nuked by {ctx.author}')  # Reason to be registered in the audit log
 					await new_channel.edit(position=channel.position)
 					await channel.delete()
+					view.stop()
+					interaction.message.edit(view=None)
 				except discord.Forbidden:
 					await ctx.send(
 						"I couldn't delete the channel, maybe this is a community updates channel?")  # Channels that are set for community updates cannot be deleted without transferring the community updates to another channel
