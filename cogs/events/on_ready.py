@@ -48,7 +48,7 @@ class onReady(commands.Cog):
 				name=f'.help',
 			))
 
-		await self.client
+		# await self.client
 
 
 def setup(client):
