@@ -1,42 +1,35 @@
 import discord
+import db
+import json
 
 from discord.ext import commands
 from pytz import timezone
 from datetime import datetime
 from asyncio import sleep
 
+def get_prefix(guild):
+	with open('prefix.json', 'r') as f:
+		cache = json.load(f)
+
+	guild = str(guild)
+
+	if guild in cache:
+		prefix = cache[guild]
+	else:
+		db.execute(f"SELECT prefix FROM Prefix WHERE guild = '{guild}'")
+		prefix = db.fetchone()
+		prefix = prefix[0]
+		cache[str(guild)] = prefix
+
+		with open('prefix.json', 'w') as g:
+			json.dump(cache, g)
+
+	return prefix
+
 
 class onReady(commands.Cog):
 	def __init__(self, client):
 		self.client = client
-
-	async def status(self):
-		while True:
-			await self.client.wait_until_ready()
-			await self.client.change_presence(
-				activity=discord.Activity(
-					type=discord.ActivityType.listening,
-					name=f'-help | {len(self.client.guilds)} servers'
-				))
-			await sleep(5)
-			await self.client.change_presence(
-				activity=discord.Activity(
-					type=discord.ActivityType.listening,
-					name=f'-help | {len(self.client.users)} users'
-				))
-			await sleep(5)
-			# await self.client.change_presence(
-			# 	activity=discord.Activity(
-			# 		type=discord.ActivityType.watching,
-			# 		name=f" {len(self.client.guilds)} servers"
-			# 	))
-			# await sleep(15)
-			# await self.client.change_presence(
-			# 	activity=discord.Activity(
-			# 		type=discord.ActivityType.watching,
-			# 		name=f" {len(self.client.users)} users"
-			# 	))
-			# await sleep(15)
 
 	@commands.Cog.listener()
 	async def on_ready(self):
@@ -49,7 +42,13 @@ class onReady(commands.Cog):
 		print(f"Users: {len(self.client.users)}")
 		print("-------------------")
 
-		self.client.loop.create_task(self.status())
+		await self.client.change_presence(
+			activity=discord.Activity(
+				type=discord.ActivityType.listening,
+				name=f'{get_prefix()}help',
+			))
+
+		await self.client
 
 
 def setup(client):
