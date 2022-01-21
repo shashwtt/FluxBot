@@ -45,7 +45,7 @@ class onReady(commands.Cog):
 		await self.client.change_presence(
 			activity=discord.Activity(
 				type=discord.ActivityType.listening,
-				name=f'{get_prefix()}help',
+				name=f'.help',
 			))
 
 		await self.client
