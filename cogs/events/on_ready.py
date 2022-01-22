@@ -43,8 +43,9 @@ class onReady(commands.Cog):
 		print("-------------------")
 
 		await self.client.change_presence(
-			activity=discord.CustomActivity(
-				name=f'.help | {len(self.client.users)} users | {len(self.client.guilds)} guilds!'
+			activity=discord.Game(
+				name=f'.help | {len(self.client.users)} users | {len(self.client.guilds)} guilds!',
+				type=discord.ActivityType.unknown
 			))
 
 		# await self.client
