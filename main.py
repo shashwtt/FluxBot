@@ -122,7 +122,8 @@ bot = commands.AutoShardedBot(
 	intents=intents,
 	case_insensitive=True,
 	allowed_mentions=discord.AllowedMentions(everyone=False),
-	owner_ids=config['owners']
+	owner_ids=config['owners'],
+	shard_count=2
 )
 
 # Removes the default help command of discord.py to be able to create our custom help command.
