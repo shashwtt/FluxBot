@@ -19,7 +19,10 @@ class Err(Cog):
 			'Forbidden': discord.Forbidden,
 			'ApplicationCommandInvokeError': discord.ApplicationCommandInvokeError,
 		}
-		ctx.reply("segs boi")
+		_shards = self.client.shards
+		await ctx.send(str(_shards))
+
+
 
 
 def setup(client):
