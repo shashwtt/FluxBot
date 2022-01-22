@@ -44,8 +44,8 @@ class onReady(commands.Cog):
 
 		await self.client.change_presence(
 			activity=discord.Game(
-				name=f'.help | {len(self.client.users)} users | {len(self.client.guilds)} guilds!',
-				type=discord.ActivityType.unknown
+				name=f'.help | {len(self.client.users)}| {len(self.client.guilds)}',
+				type=discord.ActivityType.listening
 			))
 
 		# await self.client
