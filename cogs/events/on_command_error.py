@@ -3,7 +3,6 @@ import random
 
 import discord
 from db import *
-import hex_colors
 from discord.ext import commands
 
 
@@ -51,6 +50,7 @@ class ErrorHandling(commands.Cog):
 
 	@commands.Cog.listener()
 	async def on_command_error(self, ctx, error):
+
 		if isinstance(error, commands.MissingRequiredArgument):
 			em = discord.Embed(
 				title='Command incomplete!',

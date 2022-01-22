@@ -117,7 +117,7 @@ config = get_config()
 +--------------------------------+
 """
 
-bot = commands.Bot(
+bot = commands.AutoShardedBot(
 	command_prefix=get_prefix,
 	intents=intents,
 	case_insensitive=True,

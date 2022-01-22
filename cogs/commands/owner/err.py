@@ -11,6 +11,14 @@ class Err(Cog):
 	@commands.is_owner()
 	@commands.command(name="err", help="Raise errors, wait whaa..")
 	async def err(self, ctx, *, err_name):
+		errors = {
+			'ApplicationCommandError': discord.ApplicationCommandError,
+			'ExtensionError': discord.ExtensionError,
+			'HttpException': discord.HTTPException,
+			'NotFound': discord.NotFound,
+			'Forbidden': discord.Forbidden,
+			'ApplicationCommandInvokeError': discord.ApplicationCommandInvokeError,
+		}
 		ctx.reply("segs boi")
 
 
