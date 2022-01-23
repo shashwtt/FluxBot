@@ -17,4 +17,4 @@ async def get_data(db):
         return row[0]
 
 
-db = conn.cursor()
+cur = conn.cursor()

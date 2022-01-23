@@ -16,8 +16,8 @@ def get_prefix(guild):
 	if guild in cache:
 		prefix = cache[guild]
 	else:
-		db.execute(f"SELECT prefix FROM Prefix WHERE guild = '{guild}'")
-		prefix = db.fetchone()
+		cur.execute(f"SELECT prefix FROM Prefix WHERE guild = '{guild}'")
+		prefix = cur.fetchone()
 		prefix = prefix[0]
 		cache[str(guild)] = prefix
 

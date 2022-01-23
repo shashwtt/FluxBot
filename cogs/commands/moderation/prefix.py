@@ -19,7 +19,7 @@ class Prefix(commands.Cog):
             return
 
         else:
-            db.execute(f"UPDATE Prefix SET prefix = '{new_prefix}' WHERE guild = '{ctx.guild.id}'")
+            cur.execute(f"UPDATE Prefix SET prefix = '{new_prefix}' WHERE guild = '{ctx.guild.id}'")
             conn.commit()
 
             em = discord.Embed(

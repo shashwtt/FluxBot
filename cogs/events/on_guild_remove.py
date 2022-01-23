@@ -8,10 +8,10 @@ class OnGuildRemove(commands.Cog):
 
     @commands.Cog.listener()
     async def on_guild_remove(self, guild):
-        db.execute(f"DELETE FROM Prefix WHERE guild = '{guild.id}'")
-        db.execute(f"DELETE FROM AutoMod WHERE guild = '{guild.id}'")
-        db.execute(f"DELETE FROM Starboard WHERE guild = '{guild.id}'")
-        db.execute(f"DELETE FROM AutoRole WHERE guild = '{guild.id}'")
+        cur.execute(f"DELETE FROM Prefix WHERE guild = '{guild.id}'")
+        cur.execute(f"DELETE FROM AutoMod WHERE guild = '{guild.id}'")
+        cur.execute(f"DELETE FROM Starboard WHERE guild = '{guild.id}'")
+        cur.execute(f"DELETE FROM AutoRole WHERE guild = '{guild.id}'")
         """
         No need to store useless data and clutter the database
         """

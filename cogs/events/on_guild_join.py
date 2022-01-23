@@ -32,8 +32,8 @@ class OnGuildJoin(commands.Cog):
                 )
                 await channel.send(embed=em)
                 break
-        db.execute(f"INSERT INTO Prefix(guild, prefix) VALUES ('{guild.id}','{self.prefix}')")
-        db.execute(f"INSERT INTO AutoMod(guild, _status) VALUES ('{guild.id}','enabled')")
+        cur.execute(f"INSERT INTO Prefix(guild, prefix) VALUES ('{guild.id}','{self.prefix}')")
+        cur.execute(f"INSERT INTO AutoMod(guild, _status) VALUES ('{guild.id}','enabled')")
         print(f"Created config for new server -> {str(guild)}, ID -> {guild.id}")
         conn.commit()
 

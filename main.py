@@ -15,8 +15,8 @@ from dotenv import load_dotenv
 
 
 def create_prefix(guild):
-	db.execute(f"INSERT INTO Prefix(guild, prefix) VALUES ('{guild.id}','{prefix}')")
-	db.execute(f"INSERT INTO AutoMod(guild, _status) VALUES ('{guild.id}','enabled')")
+	cur.execute(f"INSERT INTO Prefix(guild, prefix) VALUES ('{guild.id}','{prefix}')")
+	cur.execute(f"INSERT INTO AutoMod(guild, _status) VALUES ('{guild.id}','enabled')")
 	print(f"Created config for new server -> {str(guild)}, ID -> {guild.id}")
 	conn.commit()
 
@@ -36,8 +36,8 @@ def get_prefix(_client, message):
 			return prefix
 
 		else:
-			db.execute(f"SELECT prefix FROM Prefix WHERE guild = '{str(message.guild.id)}'")
-			prefix = db.fetchone()
+			cur.execute(f"SELECT prefix FROM Prefix WHERE guild = '{str(message.guild.id)}'")
+			prefix = cur.fetchone()
 			cache[str(guild)] = prefix[0]
 			# So that it gets stored in the cache
 			with open('prefix.json', 'w') as f:
