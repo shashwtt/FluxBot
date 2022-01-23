@@ -79,9 +79,9 @@ class Help(Cog):
 		return aliases
 
 	async def cmd_help(self, ctx, command):  # Makes the embed
-		_aliases = ', '.join([*command.aliases])
-		if _aliases == '':
-			_aliases = "Command has no aliases"
+		_aliases = f'`{command}`'
+		for alias in command.aliases:
+			_aliases += f', `{alias}`'
 
 		_help = command.description
 		if _help is None:
@@ -89,9 +89,9 @@ class Help(Cog):
 			if _help is None:
 				_help = 'No help text provided by developer'
 
-		em = discord.Embed(title=f"__{command}__ info ",)
+		em = discord.Embed(title=f"{command} info ",)
 
-		em.add_field(name='Description:', value=_help, inline=False)
+		em.add_field(name='Description:', value=f"*{_help}*", inline=False)
 		em.add_field(name='Usage:', value=decorate(command), inline=False)
 		em.add_field(name='Aliases:', value=_aliases, inline=False)
 		em.set_footer(text="Usage Syntax: <required> [optional]")
