@@ -14,7 +14,12 @@ class Invite(commands.Cog):
 			self.config = json.load(config_file)
 			config_file.close()
 
-	@commands.command(name='invite', aliases=[".inv", '.support'], help="Invite the bot to your server")
+	@commands.command(
+		name='invite',
+		aliases=[".inv", '.support'],
+		help="Invite the bot to your server",
+		description="Get Invite links to add Flux to your server and to join Flux's support server.."
+	)
 	async def invite(self, ctx):
 		owner = await self.client.fetch_user(int(self.client.owner_ids[0]))
 		em = discord.Embed(

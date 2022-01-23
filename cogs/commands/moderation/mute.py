@@ -14,6 +14,7 @@ def parse_time(time):
 		try:
 			int_time = int(x)
 			time += str(int_time)
+			del x_list[x]
 		except Exception:
 			mode += x
 

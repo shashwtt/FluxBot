@@ -89,7 +89,7 @@ class Help(Cog):
 			if _help is None:
 				_help = 'No help text provided by developer'
 
-		em = discord.Embed(title=str(command).capitalize() + " info ", color=0xf2cb7d)
+		em = discord.Embed(title=f"__{command}__ info ",)
 
 		em.add_field(name='Description:', value=_help, inline=False)
 		em.add_field(name='Usage:', value=decorate(command), inline=False)
@@ -132,9 +132,7 @@ class Help(Cog):
 
 		my_select_view = View(timeout=20)
 		my_select_view.on_timeout = my_select_view_timeout
-		select_options = {
-			"x": "All Commands"
-		}
+		select_options = {}
 
 		for i in range(len(working_cogs)):
 			select_options[str(i)] = working_cogs[i]
