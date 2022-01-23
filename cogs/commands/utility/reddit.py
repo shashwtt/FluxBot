@@ -12,8 +12,10 @@ class Reddit(commands.Cog):
 
     @commands.command(name='reddit', aliases=['subreddit', 'r'],
                       help='Gets a post from the subreddit provided')
-    @commands.cooldown(1, 3, commands.BucketType.user)
     async def get_reddit_post(self, ctx, *, subreddit):
+        if len(subreddit.split()) > 1:
+            subreddit = subreddit.split()[0]
+
         url = f'https://meme-api.herokuapp.com/gimme/{subreddit}'  # This api only sends posts with images or gifs.
 
         post = requests.get(url=url).json()
@@ -21,7 +23,7 @@ class Reddit(commands.Cog):
         if 'nsfw' in post:  # Sometimes it raises KeyError
             if post['nsfw']:
                 if not ctx.channel.is_nsfw():
-                    await ctx.send("The post I got from that subreddit is marked NSFW. I cannot send it here")
+                    await ctx.reply("The post I got from that subreddit is marked NSFW. I cannot send it here", mention_author=False)
                     return
 
         try:

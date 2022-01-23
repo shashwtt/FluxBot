@@ -43,12 +43,10 @@ class onReady(commands.Cog):
 		print("-------------------")
 
 		await self.client.change_presence(
-			activity=discord.Game(
-				name=f'.help | {len(self.client.users)} users {len(self.client.guilds)} servers',
+			activity=discord.Activity(
+				name=f'.help | @Flux',
 				type=discord.ActivityType.listening
 			))
-
-		# await self.client
 
 
 def setup(client):

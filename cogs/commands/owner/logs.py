@@ -17,5 +17,6 @@ class Logs(Cog):
         else:
             return
 
+
 def setup(client):
     client.add_cog(Logs(client))

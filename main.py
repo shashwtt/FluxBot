@@ -93,7 +93,7 @@ def load_events():
 		if file.endswith(".py"):
 			extension = file[:-3]
 			blacklisted_ext = []
-			# blacklisted_ext = ["on_command_error"]
+			blacklisted_ext = ["on_command_error"]
 			if extension in blacklisted_ext:
 				print(f"Skipped event : {extension}")
 			else:
@@ -117,13 +117,12 @@ config = get_config()
 +--------------------------------+
 """
 
-bot = commands.AutoShardedBot(
+bot = commands.Bot(
 	command_prefix=get_prefix,
 	intents=intents,
 	case_insensitive=True,
 	allowed_mentions=discord.AllowedMentions(everyone=False),
 	owner_ids=config['owners'],
-	shard_count=2
 )
 
 # Removes the default help command of discord.py to be able to create our custom help command.
@@ -139,17 +138,6 @@ if __name__ == '__main__':
 		with open("config.json") as file:
 			config = json.load(file)
 	prefix = config["bot_prefix"]
-
-
-# The code in this event is executed every time a command has been *successfully* executed
-@bot.event
-async def on_command_completion(ctx):
-	fullCommandName = ctx.command.qualified_name
-	split = fullCommandName.split(" ")
-	executedCommand = str(split[0])
-	logMessage = "Executed " + str(executedCommand) + " command in " + str(ctx.guild.name) + " (ID: " + str(
-		ctx.message.guild.id) + ") by " + str(ctx.message.author) + " (ID: " + str(ctx.message.author.id) + ")"
-	print(logMessage)
 
 
 # Run the bot with the token
