@@ -10,7 +10,7 @@ class UnNick(commands.Cog):
 	@commands.command(
 		name='unnick',
 		usage='[member]',
-		aliases=['un_nick', 'remove_nick', 'remove_nickname', 'reset_nick', 'reset_nick'],
+		aliases=['un_nick', 'remove_nick', 'remove_nickname', 'reset_nick', 'reset_nickname'],
 		help='Reset nicknames!',
 		description="Reset your nickname on the server. This command can also be used to reset the nickname of other members, type `.help nick` for more!"
 	)
