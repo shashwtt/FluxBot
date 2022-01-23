@@ -33,7 +33,10 @@ class Ban(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 
-	@commands.command(name='ban', help='Ban a member from the server', usage='<member> <reason>')
+	@commands.command(
+		name='ban',
+		help='Ban a member from the server',
+		usage='<member> [reason]')
 	@commands.has_permissions(ban_members=True)
 	@commands.bot_has_permissions(ban_members=True)
 	async def ban(self, ctx, member:discord.Member, *, reason="No reason provided"): #Default reason is "No reason provided"

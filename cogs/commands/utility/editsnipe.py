@@ -22,7 +22,12 @@ class editSnipe(commands.Cog):
         edit_msg[str(before.channel.id)]['author'] = before.author
         edit_msg[str(before.channel.id)]['time'] = datetime.now(pytz.utc)  # This will be used for the timestamp
 
-    @commands.command(name='editsnipe', aliases=['es'], help='Check the last edited message in the channel')
+    @commands.command(
+        name='editsnipe',
+        aliases=['es'],
+        help='Check the last edited message in the channel',
+        description="Get the last edited message in the channel, and what was the message before it was edited.."
+    )
     async def editsnipe(self, ctx):
         try:
             em = discord.Embed(color=discord.Colour.blurple(), timestamp=edit_msg[str(ctx.channel.id)]['time'])

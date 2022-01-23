@@ -6,7 +6,13 @@ class Clear(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(name='delete', aliases=['clear','purge','del'], help='Mass delete messages')
+    @commands.command(
+        name='delete',
+        aliases=['clear','purge','del'],
+        usage='[amount]',
+        help='Delete messages with this command!',
+        description="Delete upto 100 messages at once with this command... only the given amount of messages will be deleted, if amount is not specified it deletes the last message!"
+    )
     @commands.bot_has_permissions(manage_messages=True)
     @commands.has_permissions(manage_messages=True)
     async def clear(self, ctx, amount=1):

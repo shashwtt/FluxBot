@@ -3,16 +3,16 @@ from discord.ext.commands import BucketType
 from discord.ext import commands
 
 
-class Nick(commands.Cog):
+class UnNick(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 
 	@commands.command(
-		name='nick',
-		aliases=['nickname', 'name', 'servername', 'rename'],
-		usage='<member> <nickname>',
-		help='Manage your and other\'s nickname for the server!',
-		description='Set a custom nickname for yourself on this server! This command can also be used to change the nickname of other people on the server'
+		name='unnick',
+		usage='[member]',
+		aliases=['un_nick', 'remove_nick', 'remove_nickname', 'reset_nick', 'reset_nick'],
+		help='Reset nicknames!',
+		description="Reset your nickname on the server. This command can also be used to reset the nickname of other members, type `.help nick` for more!"
 	)
 	@commands.cooldown(2, 45, BucketType.user)
 	@commands.bot_has_permissions(manage_nicknames=True)
@@ -80,4 +80,4 @@ class Nick(commands.Cog):
 
 
 def setup(client):
-	client.add_cog(Nick(client))
+	client.add_cog(UnNick(client))

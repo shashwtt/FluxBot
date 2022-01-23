@@ -11,7 +11,13 @@ class Avatar(Cog):
 	def __init__(self, client):
 		self.client = client
 
-	@commands.command(name='avatar', aliases=['av', "pfp"], help="Show a user's avatar in full size")
+	@commands.command(
+		name='avatar',
+		usage="[user]",
+		aliases=['av', "pfp"],
+		help="Show a user's avatar in full size",
+		description="Maximize a user's avatar to download the image or just view it. If somebody wants to view other's avatar there is 10% chance a uno-reverse button will appear!"
+	)
 	@cooldown(1, 5, BucketType.user)
 	async def avatar(self, ctx, user: discord.Member = None):
 
@@ -49,8 +55,10 @@ class Avatar(Cog):
 			await interaction.response.edit_message(embed=em2, view=view2)
 
 		if uno_reverse:
-			reverse_butt.callback = uno_reverse_callback
-			view.add_item(reverse_butt)
+			chance = random.randrange(1, 10)
+			if chance == 10:
+				reverse_butt.callback = uno_reverse_callback
+				view.add_item(reverse_butt)
 
 		download_button = Button(label="Download Image", url=f"{member.avatar.url}")
 		view.add_item(download_button)

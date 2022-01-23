@@ -5,7 +5,7 @@ from cogs.cog_helpers.pages import PaginatorButton, Paginator
 from discord.ext import commands
 from discord.ext.commands import cooldown, BucketType, Cog, slash_command
 from discord.ui import Select, View, Button
-import db
+from db import *
 
 
 def get_prefix(guild):
@@ -17,8 +17,8 @@ def get_prefix(guild):
 	if guild in cache:
 		prefix = cache[guild]
 	else:
-		db.execute(f"SELECT prefix FROM Prefix WHERE guild = '{guild}'")
-		prefix = db.fetchone()
+		cur.execute(f"SELECT prefix FROM Prefix WHERE guild = '{guild}'")
+		prefix = cur.fetchone()
 		prefix = prefix[0]
 		cache[str(guild)] = prefix
 
@@ -49,18 +49,21 @@ def get_working_cogs(ctx, client):
 
 
 def decorate(command):
-	args = []
+	if command.usage is None or command.usage == '':
+		return f"```{command} {command.usage}```"
+	else:
+		args = []
 
-	for key, value in command.params.items():
-		if key not in ("self", "ctx"):
-			if "None" in str(value) or "No reason provided" in str(value):
-				args.append(f"[{key}]")
-			else:
-				args.append(f"<{key}>")
+		for key, value in command.params.items():
+			if key not in ("self", "ctx"):
+				if "None" in str(value) or "No reason provided" in str(value):
+					args.append(f"[{key}]")
+				else:
+					args.append(f"<{key}>")
 
-	args = " ".join(args)
+		args = " ".join(args)
 
-	return f"```{command} {args}```"
+		return f"```{command} {args}```"
 
 
 class Help(Cog):
@@ -80,17 +83,26 @@ class Help(Cog):
 		if _aliases == '':
 			_aliases = "Command has no aliases"
 
-		_help = command.help
+		_help = command.description
 		if _help is None:
-			_help = 'No help text provided by developer'
+			_help = command.help
+			if _help is None:
+				_help = 'No help text provided by developer'
 
-		em = discord.Embed(title=str(command).capitalize(), description=command.help, color=0xf2cb7d)
+		em = discord.Embed(title=str(command).capitalize() + " info ", color=0xf2cb7d)
+
+		em.add_field(name='Description:', value=_help, inline=False)
 		em.add_field(name='Usage:', value=decorate(command), inline=False)
 		em.add_field(name='Aliases:', value=_aliases, inline=False)
+		em.set_footer(text="Usage Syntax: <required> [optional]")
 
 		await ctx.send(embed=em)
 
-	@commands.command(name="help", aliases=['h'], description="Get help on a command or the Bot!")
+	@commands.command(
+		name="help",
+		aliases=['h'],
+		usage="[command/category]",
+		help="Get help on a command or the Bot!")
 	async def help(self, ctx, *, command_name=''):
 		prefix = get_prefix(ctx.guild.id)
 		working_cogs = get_working_cogs(ctx, self.client)

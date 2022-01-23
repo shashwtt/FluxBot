@@ -31,7 +31,12 @@ class Kick(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 
-	@commands.command(name='kick', help='Kick a member from the Server...')
+	@commands.command(
+		name='kick',
+		usage='<member> [reason]',
+		help='Kick a member from the Server...',
+		description='Kick a mentioned member from the server by the given reason. The user will get a dm notifying him about the person, reason, and the server he was kicked from. This activity is registered in the audit log'
+	)
 	@commands.has_permissions(kick_members=True)
 	@commands.bot_has_permissions(kick_members=True)
 	async def kick(self, ctx, member: discord.Member = None, *, reason="No Reason Provided.."):

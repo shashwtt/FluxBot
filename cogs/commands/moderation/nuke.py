@@ -9,7 +9,13 @@ class Nuke(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 
-	@commands.command(name='nuke', help='Deletes the channel and makes a copy of it')
+	@commands.command(
+		name='nuke',
+		help='Delete a channel and make a copy of it',
+		usage='[channel]',
+		aliases=["resetchannel", 'selfdestruct'],
+		description="Use this command to delete a channel and then make a new copy of it, basically making it look like everything was deleted... Also note that this command will delete all the messages including pinned messages"
+	)
 	@commands.has_permissions(manage_channels=True)
 	@commands.bot_has_permissions(administrator=True)
 	async def nuke(self, ctx, channel: discord.TextChannel = None):
