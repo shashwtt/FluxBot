@@ -13,7 +13,6 @@ class BotLog(Cog):
     def __init__(self, client):
         self.client = client
         self.heroku_ = heroku3.from_key('15f0ed8e-5a8d-4c50-81df-7f6200e26df6')
-        self.flux_app = self.heroku_.app("flux-discord")
 
     @commands.is_owner()
     @commands.command(
@@ -27,10 +26,17 @@ class BotLog(Cog):
         if lines == 0:
             lines = 25
 
-        logs = self.flux_app.get_logs(lines=lines)
+        logs = self.heroku_.get_app_log("flux-discord", lines=lines)
         as_bytes = map(str.encode, logs)
-        content = b"\n".join(as_bytes)
-        await ctx.send(f"`Most recent {lines} of logs from app flux-discord - `", file=discord.File(BytesIO(content), "logs.txt"))
+        content = b"".join(as_bytes)
+        await ctx.author.send(embed=discord.Embed(
+            description=f"Last {lines} of logs by the bot from heroku app `flux-discord`",
+            color=discord.Color.orange()
+        ), file=discord.File(BytesIO(content), "logs.txt"))
+        await ctx.send(embed=discord.Embed(
+            description="<:flux_check:934693030592655411> I have sent you a private message!",
+            color=discord.Color.brand_green()
+        ))
 
 
 def setup(client):
