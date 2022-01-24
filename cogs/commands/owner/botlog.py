@@ -32,9 +32,9 @@ class BotLog(Cog):
 
 		if len(logs) < 1900:
 			await ctx.author.send(embed=discord.Embed(
-				description=f"Last {lines} lines of log by the bot from heroku app `flux-discord`\n\n Bot Logs - ```prolog \n {logs}```",
+				description=f"Last {lines} lines of log by the bot from heroku app `flux-discord`",
 				color=discord.Color.orange()
-			))
+			), content=f"```prolog \n {logs}```")
 		else:
 			await ctx.author.send(embed=discord.Embed(
 				description=f"Last {lines} lines of log by the bot from heroku app `flux-discord`",
