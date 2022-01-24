@@ -59,7 +59,7 @@ def get_config():
 
 def load_commands():
 	blacklisted_cogs = ["__pycache__"]
-	blacklisted_commands = ['unnick']
+	blacklisted_commands = []
 	print("---------------------------------")
 	for folder in os.listdir("cogs/commands/"):
 		if os.path.isdir(f"cogs/commands/{folder}"):

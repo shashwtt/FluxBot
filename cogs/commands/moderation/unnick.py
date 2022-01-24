@@ -16,7 +16,7 @@ class UnNick(commands.Cog):
 	)
 	@commands.cooldown(2, 45, BucketType.user)
 	@commands.bot_has_permissions(manage_nicknames=True)
-	async def nick(self, ctx, user: discord.Member, *, nickname):
+	async def unnick(self, ctx, user: discord.Member):
 		if not ctx.author.guild_permissions.manage_nicknames:
 			if ctx.author != user:
 				ctx.reply(
@@ -56,16 +56,8 @@ class UnNick(commands.Cog):
 		if before_nick is None:
 			before_nick = user.name
 
-		if len(nickname) > 32:
-			embed_err = discord.Embed(
-				description="A nickname cannot be longer than 32 digits...",
-				colour=discord.Colour.brand_red()
-			)
-			embed_err.set_footer(text="Choose a shorter nickname!")
-			await ctx.message.reply(embed=embed_err)
-			return
 		try:
-			await user.edit(nick=nickname)
+			await user.edit(nick=user.name)
 		except:
 			await ctx.send(embed=discord.Embed(description="That person is too powerful for me to rename...", color=discord.Color.brand_red()))
 			return
@@ -75,7 +67,7 @@ class UnNick(commands.Cog):
 		else:
 			embed.description = f"**{ctx.author.mention} changed {user.name}'s nickname!**"
 		embed.add_field(name="nickname before -", value=f"```{before_nick}```", inline=False)
-		embed.add_field(name="nickname now -", value=f"```{nickname}```", inline=False)
+		embed.add_field(name="nickname now -", value=f"```{user.name}```", inline=False)
 		await ctx.send(embed=embed)
 
 
