@@ -34,7 +34,9 @@ class BotLog(Cog):
 			await ctx.author.send(embed=discord.Embed(
 				description=f"Last {lines} lines of log by the bot from heroku app `flux-discord`",
 				color=discord.Color.orange()
-			), content=f"```prolog \n {logs}```")
+			), content=f"```prolog "
+			           f""
+			           f"{logs}```")
 		else:
 			await ctx.author.send(embed=discord.Embed(
 				description=f"Last {lines} lines of log by the bot from heroku app `flux-discord`",
