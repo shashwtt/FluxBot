@@ -33,14 +33,13 @@ class BotLog(Cog):
 		if len(logs) < 1900:
 			await ctx.author.send(embed=discord.Embed(
 				description=f"Last {lines} lines of log by the bot from heroku app `flux-discord`",
-				color=discord.Color.orange()
-			), content=f"```prolog "
-			           f""
-			           f"{logs}```")
+				color=discord.Color.purple()
+			), content=f'''```prolog
+			{logs}''')
 		else:
 			await ctx.author.send(embed=discord.Embed(
 				description=f"Last {lines} lines of log by the bot from heroku app `flux-discord`",
-				color=discord.Color.orange()
+				color=discord.Color.purple()
 			), file=discord.File(BytesIO(content), "logs.log"))
 
 		await ctx.send(embed=discord.Embed(
