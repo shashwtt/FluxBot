@@ -2,17 +2,22 @@ import discord
 import heroku3
 import urllib3
 from io import BytesIO
+from dotenv import load_dotenv
 
 from discord.ext import commands
+import os
 from discord.ext.commands import cooldown, BucketType, Cog
 
+
+load_dotenv()
+heroku_key = os.getenv("heroku_key")
 urllib3.disable_warnings()
 
 
 class BotLog(Cog):
 	def __init__(self, client):
 		self.client = client
-		self.heroku_ = heroku3.from_key('15f0ed8e-5a8d-4c50-81df-7f6200e26df6')
+		self.heroku_ = heroku3.from_key(heroku_key)
 
 	@commands.is_owner()
 	@commands.command(
@@ -34,8 +39,8 @@ class BotLog(Cog):
 			await ctx.author.send(embed=discord.Embed(
 				description=f"Last {lines} lines of log by the bot from heroku app `flux-discord`",
 				color=discord.Color.purple()
-			), content=f'''```prolog
-			{logs}```''')
+			), content=f'''```accesslog
+{logs}```''')
 		else:
 			await ctx.author.send(embed=discord.Embed(
 				description=f"Last {lines} lines of log by the bot from heroku app `flux-discord`",

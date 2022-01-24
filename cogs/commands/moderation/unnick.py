@@ -16,7 +16,7 @@ class UnNick(commands.Cog):
 	)
 	@commands.cooldown(2, 45, BucketType.user)
 	@commands.bot_has_permissions(manage_nicknames=True)
-	async def unnick(self, ctx, user: discord.Member):
+	async def nick(self, ctx, user: discord.Member):
 		if not ctx.author.guild_permissions.manage_nicknames:
 			if ctx.author != user:
 				ctx.reply(

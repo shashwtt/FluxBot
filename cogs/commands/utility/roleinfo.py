@@ -15,7 +15,10 @@ class RoleInfo(Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(name='roleinfo', aliases=['ri'], help='Shows information about a role')
+    @commands.command(
+        name='roleinfo',
+        aliases=['ri'],
+        help='Shows information about a role')
     @cooldown(1, 10, BucketType.user)
     async def role_info(self, ctx, role: discord.Role):
         if role not in ctx.guild.roles:
@@ -41,7 +44,7 @@ class RoleInfo(Cog):
 
                 perm = perm.title()  # Capitalizing first letter of every word
                 perm = perm.replace('True', '')
-                d_perms += f"{perm}\n"
+                d_perms += f"`{perm}`"
 
         em = discord.Embed(title='@' + role.name,
                            color=role.color)  # I chose role.color, but that's a personal preference

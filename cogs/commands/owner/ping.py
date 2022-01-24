@@ -11,7 +11,11 @@ class Ping(Cog):
 	def __init__(self, client):
 		self.client = client
 
-	@commands.command(name="ping", aliases=["latency"])
+	@commands.command(
+		name="ping",
+		aliases=["latency"],
+		help="Get stats on bot's running status and more!")
+	@commands.is_owner()
 	async def ping(self, context):
 		"""
 		Check if the bot is running.

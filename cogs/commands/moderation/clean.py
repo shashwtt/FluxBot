@@ -10,7 +10,12 @@ class Clean(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(name='clean', help="Delete a lot of bot messages")
+    @commands.command(
+        name='clean',
+        aliases=['botdel', 'delbot'],
+        help="Delete a lot of bot messages",
+        description="Delete last 100 messages sent by an BOT account.. It will not delete the messages which are sent by actual users.. if you want to delete all messages look at delete command"
+    )
     @commands.has_permissions(manage_messages=True)
     @commands.bot_has_permissions(manage_messages=True)
     async def clean(self, ctx):

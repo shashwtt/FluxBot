@@ -10,8 +10,13 @@ class Reddit(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(name='reddit', aliases=['subreddit', 'r'],
-                      help='Gets a post from the subreddit provided')
+    @commands.command(
+        name='reddit',
+        usage="<subreddit>",
+        aliases=['subreddit', 'r'],
+        help='Gets a post from the subreddit provided',
+        description="Get a random post from the subreddit given and send it in the chat. This will also return nsfw posts, but is only sent if the channel is marked nsfw. If you don't want to see nsfw posts then run the command in a channel that is not nsfw!"
+    )
     async def get_reddit_post(self, ctx, *, subreddit):
         if len(subreddit.split()) > 1:
             subreddit = subreddit.split()[0]

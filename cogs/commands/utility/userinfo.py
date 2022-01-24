@@ -56,7 +56,7 @@ class UserInfo(Cog):
             value=roles,
             inline=False)
         em.set_footer(
-            text=f"Requested by {ctx.author.unnick}",
+            text=f"Requested by {ctx.author.nick}",
             icon_url=ctx.author.avatar.url)
 
         await ctx.send(embed=em)
