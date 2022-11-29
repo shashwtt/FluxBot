@@ -1,2 +1,2 @@
 # FluxBot
-Manage everything with Flux...
+A multi-purpose discord bot with fun and moderation commands!
