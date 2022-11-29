@@ -1,4 +1,4 @@
-pycord
+py-cord
 pytz~=2021.1
 asyncio~=3.4.3
 requests~=2.26.0
